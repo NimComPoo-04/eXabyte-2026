@@ -26,7 +26,7 @@ def convert_to_json(dir):
     processed = {}
     for f in os.listdir(dir):
         path = os.path.join(dir, f)
-        if os.path.isfile(path):
+        if os.path.isfile(path) and Path(path).suffix == '.hjson':
             with open(path) as k:
                 actual = Path(f)
                 processed[actual.stem] = hjson.load(k)
