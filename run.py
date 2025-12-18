@@ -3,10 +3,8 @@ import time
 import threading
 import hjson
 
-from watchdog.events import FileSystemEvent, FileSystemEventHandler
-from watchdog.observers import Observer
-
 from flask import Flask
+from flask_hot_reload import HotReload
 from jinja2 import Environment, FileSystemLoader, meta
 
 from pathlib import Path
@@ -17,7 +15,10 @@ from build import ROOT_DIR, COMPONENTS_CONTENT_DIR, PAGES_CONTENT_DIR, TEMPLATES
 app = Flask(__name__, static_folder=ROOT_DIR, template_folder=PAGES_CONTENT_DIR)
 env = Environment(loader = FileSystemLoader(TEMPLATES_DIR), autoescape=False)
 
+hot_reload = HotReload(app, includes = [ 'content', 'templates', 'static', 'assets' ])
+
 # If html files are read, we need to render stuff
+@app.route("/", defaults={'path':'index.html'})
 @app.route("/<path>")
 def route_html_files(path):
 
@@ -60,4 +61,4 @@ pages_data = convert_to_json(PAGES_CONTENT_DIR)
 for k, v in components_data.items():
     env.globals[k] = v
 
-app.run(debug=True)
+app.run()

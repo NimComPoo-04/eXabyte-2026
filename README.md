@@ -21,3 +21,7 @@ we are using HJSON. And at the end we are prettyfing the output using BeautifulS
 - After building out the html files, we have to run build.py which will compile all the changes and put them in the 'dist' directory.
 
 We will ensure that at all times the dist directory is in a position that it can shipped.
+
+**Development Workflow:**
+During development, developer can use the 'python run.py' command. which will launch a hot-reloading server. Chaning any of the
+relevant files will instantly update the browser. Simplifying development effort by a significant ammount.
