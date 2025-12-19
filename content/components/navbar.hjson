@@ -4,11 +4,15 @@
     buttons: [
         {
             text: Home
-            href: index.html
+            href: /index.html
         }
         {
             text: About
-            href: about.html
+            href: /about.html
+        }
+        {
+            text: Events Form
+            href: /events_form.html
         }
     ]
 }

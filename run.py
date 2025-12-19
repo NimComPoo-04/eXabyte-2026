@@ -38,12 +38,17 @@ def route_html_files(path):
                 components_data[ d[0] ] = hjson.load(f)
                 env.globals[ d[0] ] = components_data[ d[0] ]
 
-        with open(actual_path[1]) as f:
-            pages_data[ actual_path[0] ] = hjson.load(f)
+        if os.path.exists(actual_path[1]):
+            with open(actual_path[1]) as f:
+                pages_data[ actual_path[0] ] = hjson.load(f)
+        else:
+            pages_data[ actual_path[0] ] = {}
 
         template = env.get_template(path)
         return template.render(pages_data[ Path(path).stem ])
+
     except Exception as e:
+        print(e)
         return abort(404)
 
 # Route the static files
