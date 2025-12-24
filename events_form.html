@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   Events Form
+  </title>
+  <link href="/static/navbar.css" rel="stylesheet"/>
+  <link href="/static/events_form.css" rel="stylesheet"/>
+ </head>
+ <body>
+  <div class="loader-father noshow">
+   <div class="loader">
+   </div>
+  </div>
+  <div class="form-container">
+   <h1>
+    Events Registration
+   </h1>
+   <form id="event-registration">
+    <input name="_template" type="hidden" value="table"/>
+    <label for="name">
+     Full Name
+    </label>
+    <input id="name" name="name" required="" type="text"/>
+    <label for="college">
+     College Name
+    </label>
+    <input id="college" name="college" required="" type="text"/>
+    <div class="hidden-block" id="iff-sxc">
+     <label for="roll">
+      CIN Number
+     </label>
+     <input id="roll" name="roll" type="text"/>
+    </div>
+    <label for="email">
+     Email Address
+    </label>
+    <input id="email" name="email" required="" type="email"/>
+    <label for="mobile">
+     Mobile Number
+    </label>
+    <input id="mobile" name="mobile" required="" type="tel"/>
+    <label for="event">
+     Event Name
+    </label>
+    <select id="event" name="event" required="">
+     <option value="">
+      Select an option
+     </option>
+     <option value="A1">
+      Thingbert 1
+     </option>
+     <option value="B2">
+      Thingbert 2
+     </option>
+     <option value="C3">
+      Thingbert 3
+     </option>
+     <option value="D4">
+      Thingbert 4
+     </option>
+     <option value="Fkall">
+      Fkall
+     </option>
+    </select>
+    <label for="message">
+     Message
+    </label>
+    <textarea id="message" name="message" required=""></textarea>
+    <button type="submit">
+     Send Message
+    </button>
+   </form>
+  </div>
+  <script src="/static/source.js">
+  </script>
+ </body>
+</html>
