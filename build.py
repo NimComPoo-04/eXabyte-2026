@@ -53,20 +53,30 @@ def main():
     shutil.copytree(ASSETS_DIR, os.path.join(PROD, 'assets'))
     shutil.copytree(STATIC_DIR, os.path.join(PROD, 'static'))
 
-    for k, v in pages_data.items():
+    files = list(k for k in os.listdir(TEMPLATES_DIR) if os.path.isfile(os.path.join(TEMPLATES_DIR, k)))
+
+    for f in files:
 
         # we are only templating html files
-        p = k + '.html'
-        template = env.get_template(p)
-        html = template.render(v)
+        p = f.replace('.html', '.hjson')
+
+        k = Path(f).stem
+        v = pages_data.get(k)
+
+        if v is not None:
+            template = env.get_template(f)
+            html = template.render(v)
+        else:
+            with open(os.path.join(TEMPLATES_DIR, f)) as t:
+                html = t.read()
 
         # prettying output
         html = BeautifulSoup(html, 'html.parser').prettify()
 
         # rendering the file
-        rendered_html = os.path.join(PROD, p)
-        with open(rendered_html, mode='w') as f:
-            f.write(html)
+        rendered_html = os.path.join(PROD, f)
+        with open(rendered_html, mode='w') as t:
+            t.write(html)
 
 if __name__ == '__main__':
     main()
