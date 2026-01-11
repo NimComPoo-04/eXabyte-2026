@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>eXabyte Access</title>
+    <style> 
+        :root {
+            --nav-gold: #FFD700;
+            --nav-glass-bg: rgba(10, 10, 10, 0.85);
+            --border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        @property --gradient-angle {
+            syntax: "<angle>";
+            initial-value: 0deg;
+            inherits: false;
+        }
+
+        @keyframes border-spin {
+            0% { --gradient-angle: 0deg; }
+            100% { --gradient-angle: 360deg; }
+        }
+
+        @keyframes border-spin-opposite {
+            0% { --gradient-angle: 180deg; }
+            100% { --gradient-angle: 540deg; }
+        }
+
+        /* --- Global Resetting --- */
+        body {
+            font-family: "Inter", sans-serif;
+            background-color: #000;
+            margin: 0;
+            padding: 0 0 20px 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow-x: hidden;
+            overflow-y: auto;
+            box-sizing: border-box;
+        }
+
+        /* 3js Background */
+        #background {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: -1;
+            filter: blur(5px);
+            transform: scale(1.1);
+        }
+
+        /* --- NavBar --- */
+        .custom-navbar {
+            position: fixed;
+            top: 20px; left: 50%;
+            transform: translateX(-50%);
+            width: 95%; max-width: 750px;
+            padding: 10px 18px;
+            
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            
+            background: var(--nav-glass-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--border-color);
+            border-radius: 50px;
+            z-index: 2000;
+        }
+
+        .nav-left { display: flex; align-items: center; gap: 10px; }
+        .logo-circle { width: 22px; height: 22px; background: #fff; border-radius: 50%; }
+        .nav-brand { font-weight: 500; color: #fff; text-decoration: none; font-size: 1rem; }
+
+        .nav-center { display: flex; gap: 5px; }
+        .nav-link { 
+            color: #ccc; 
+            text-decoration: none; 
+            font-size: 0.85rem; 
+            padding: 6px 10px; 
+            transition: color 0.3s; 
+        }
+        .nav-link:hover { color: var(--nav-gold); }
+
+        /* Reg Button */
+        .register-btn {
+            background: #fff;
+            color: #000;
+            padding: 8px 16px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.85rem;
+            transition: transform 0.2s;
+        }
+        .register-btn:active { transform: scale(0.95); }
+
+        /* Mobile Menu toggle */
+        #menuToggle {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: white;
+            z-index: 2100;
+        }
+
+        .mobile-menu {
+            position: fixed;
+            top: 80px; left: 50%;
+            transform: translateX(-50%) translateY(-20px);
+            width: 80%;
+            
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            padding: 20px;
+            
+            background: #0a0a0a;
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s ease;
+            z-index: 1999;
+        }
+        .mobile-menu.active { opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0); }
+
+        /* --- Main Form Layout --- */
+        .layout-wrapper {
+            position: relative;
+            width: 100%; max-width: 850px;
+            margin: 120px auto 0; /* Mobile default */
+            transform: scale(1.05);
+            z-index: 1;
+            transition: transform 0.3s ease;
+        }
+
+        /* Animated Glow Borders */
+        .glow-light {
+            position: absolute;
+            top: -5px; left: -5px; right: -5px; bottom: -5px;
+            z-index: -1;
+            border-radius: 30px;
+            background: conic-gradient(from var(--gradient-angle), transparent 0%, #ca9322 10%, #ffd700 20%, transparent 45%);
+            animation: border-spin 4s linear infinite;
+            filter: blur(35px);
+        }
+        .glow-2 {
+            background: conic-gradient(from var(--gradient-angle), transparent 0%, #ca9322 10%, #edededac 20%, transparent 45%);
+            animation: border-spin-opposite 4s linear infinite;
+        }
+
+        .form-container {
+            position: relative;
+            top: 7px;
+            padding: 25px 40px;
+            background-color: #000000;
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            box-shadow: 0 0 40px rgba(0,0,0,0.8);
+            color: #ffffff;
+            z-index: 2;
+        }
+
+        /* --- Form Elements --- */
+        h2 { 
+            text-align: center; 
+            color: #ffd700; 
+            margin-bottom: 20px; 
+            text-transform: uppercase; 
+            letter-spacing: 2px; 
+            font-size: 1.3rem; 
+        }
+
+        form { 
+            display: grid; 
+            grid-template-columns: 1fr 1fr; 
+            gap: 12px 40px; 
+        }
+
+        .form-group label { 
+            display: block; 
+            margin-bottom: 5px; 
+            font-weight: 600; 
+            color: #aaa; 
+            font-size: 0.75rem; 
+        }
+
+        input, select { 
+            width: 100%; 
+            padding: 10px; 
+            background: rgba(255, 255, 255, 0.05); 
+            border: 1px solid rgba(255, 255, 255, 0.15); 
+            border-radius: 8px; 
+            color: white; 
+            font-size: 0.85rem; 
+            outline: none; 
+            box-sizing: border-box; 
+        }
+
+        /* Custom Select Arrow */
+        select {
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 10px center;
+            background-size: 1em;
+            cursor: pointer;
+        }
+        select option { background-color: #000; color: #fff; padding: 10px; }
+        select:focus { border-color: #ffd700; box-shadow: 0 0 10px rgba(255, 184, 0, 0.2); }
+
+        /* Custom Gender Toggle Switch */
+        .gender-toggle-container { 
+            position: relative; 
+            width: 100%; height: 40px; 
+            background: rgba(255, 255, 255, 0.05); 
+            border: 1px solid rgba(255, 255, 255, 0.15); 
+            border-radius: 8px; 
+            overflow: hidden; 
+        }
+        
+        .toggle-input { display: none; }
+        
+        /* Increased specificity by adding parent class */
+.gender-toggle-container .toggle-label { 
+    display: flex; 
+    align-items: center; 
+    justify-content: space-around; 
+    width: 100%; height: 100%; 
+    cursor: pointer; 
+    position: relative; 
+}
+
+        .toggle-option { 
+            flex: 1; 
+            text-align: center; 
+            z-index: 2; 
+            position: relative;
+            font-size: 0.75rem; 
+            font-weight: 700; 
+            color: #888; 
+            transition: color 0.3s; 
+        }
+
+        .toggle-slider { 
+            position: absolute; 
+            top: 3px; left: 3px; 
+            width: calc(50% - 6px); height: calc(100% - 6px); 
+            background: linear-gradient(45deg, #b8860b, #ffd700); 
+            border-radius: 6px; 
+            transition: transform 0.3s; 
+            z-index: 1; 
+        }
+
+        /* Toggle Logic */
+        .toggle-input:not(:checked) ~ .toggle-label .toggle-option:first-child { color: #000; }
+        .toggle-input:checked ~ .toggle-label .toggle-option:nth-child(2) { color: #000; }
+        .toggle-input:checked ~ .toggle-label .toggle-slider { transform: translateX(100%); }
+
+        /* Submit Button */
+        .submit-btn { grid-column: span 2; margin-top: 10px; }
+        button[type="submit"] { 
+            width: 100%; 
+            padding: 12px; 
+            background: linear-gradient(45deg, #b8860b, #ffd700); 
+            border: none; 
+            border-radius: 8px; 
+            font-weight: 800; 
+            cursor: pointer; 
+            text-transform: uppercase; 
+            color: #000; 
+        }
+
+        /* --- Media Queries --- */
+        
+        /* Mobile (Max-Width 800px) */
+        @media (max-width: 800px) {
+            .nav-center, .nav-right { display: none; }
+            #menuToggle { display: block; }
+            
+            .custom-navbar {
+                position: absolute;
+                top: 25px;
+                width: 70% !important;
+                border-radius: 15px;
+            }
+            .mobile-menu { width: 75%; position: absolute; }
+
+            .layout-wrapper { 
+                transform: scale(0.95); 
+                width: 90%; 
+                margin-top: 10vh; 
+            }
+            
+            form { grid-template-columns: 1fr; }
+            .submit-btn { grid-column: span 1; }
+        }
+
+        /* Desktop Adjustments (Min-Width 801px) */
+        @media screen and (min-width: 801px) {
+            .layout-wrapper { margin-top: 85px; }
+            /* Fix slider alignment for desktop width */
+            .toggle-input:checked ~ .toggle-label .toggle-slider { 
+                transform: translateX(calc(100% + 6px)); 
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <canvas id="background"></canvas>
+
+    <nav class="custom-navbar">
+        <div class="nav-left">
+            <div class="logo-circle"></div>
+            <a href="#" class="nav-brand">eXabyte</a>
+        </div>
+        <div class="nav-center">
+            <a class="nav-link" href="#">x-cryptus</a>
+            <a class="nav-link" href="#">sponsors</a>
+            <a class="nav-link" href="#">about-us</a>
+            <a class="nav-link" href="#">contact-us</a>
+        </div>
+        <div class="nav-right">
+            <a href="#" class="register-btn">Register</a>
+        </div>
+        <button id="menuToggle">
+            <svg width="24" height="24" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M4 6h16M4 12h16M4 18h16"></path>
+            </svg>
+        </button>
+    </nav>
+
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="#" class="nav-link">x-cryptus</a>
+        <a href="#" class="nav-link">sponsors</a>
+        <a href="#" class="nav-link">about-us</a>
+        <a href="#" class="nav-link">contact-us</a>
+        <a href="#" class="register-btn" style="text-align: center; margin-top: 10px;">Register</a>
+    </div>
+
+    <div class="layout-wrapper">
+        <div class="glow-light"></div>
+        <div class="glow-light glow-2"></div>
+        
+        <div class="form-container">
+            <h2>eXabyte Registration</h2>
+            <form action="#">
+                <div class="form-group"><label>Full Name</label><input type="text" placeholder="Sam" required></div>
+                <div class="form-group"><label>Email Address</label><input type="email" placeholder="sam@example.com" required></div>
+                <div class="form-group"><label>Password</label><input type="password" required></div>
+                <div class="form-group"><label>random bs</label><input type="number" placeholder="quantity type"></div>
+                <div class="form-group"><label>Date of Birth</label><input type="date"></div>
+                <div class="form-group"><label>Phone Number</label><input type="tel" placeholder="91-9999-9999"></div>
+                
+                <div class="form-group">
+                    <label>Gender</label>
+                    <div class="gender-toggle-container">
+                        <input type="checkbox" id="gender-toggle" class="toggle-input">
+                        <label for="gender-toggle" class="toggle-label">
+                            <span class="toggle-option">Male</span>
+                            <span class="toggle-option">Female</span>
+                            <div class="toggle-slider"></div>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Event</label>
+                    <select><option>e1</option><option>e2</option></select>
+                </div>
+                <div class="form-group"><label>random bs</label><input type="text" placeholder="text type"></div>
+                <div class="form-group"><label>Short Bio</label><input type="text" placeholder="Brief introduction..."></div>
+                
+                <div class="submit-btn"><button type="submit">Submit</button></div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const menuToggle = document.getElementById('menuToggle');
+        const mobileMenu = document.getElementById('mobileMenu');
+        menuToggle.addEventListener('click', () => mobileMenu.classList.toggle('active'));
+    </script>
+
+    <script type="module">
+        import * as THREE from "https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.module.min.js";
+
+        // 1. Setup Scene
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(25, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('background'), alpha: true });
+        
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        camera.position.set(0, 1, 0.3); 
+        camera.rotation.set(Math.PI/2, 0, -Math.PI/6);
+
+        // 2. Shaders (Vertex & Fragment)
+        const vertexShader = `
+            uniform float size; 
+            uniform float scale; 
+            uniform float time;
+            varying float vFogDepth;
+
+            float random(vec2 co){ return fract(sin(dot(co, vec2(12.9898, 78.233))) * 43758.5453); }
+            
+            float noise(vec2 st) {
+                vec2 i = floor(st); vec2 f = fract(st);
+                float a = random(i); float b = random(i + vec2(1.0, 0.0));
+                float c = random(i + vec2(0.0, 1.0)); float d = random(i + vec2(1.0, 1.0));
+                vec2 u = f*f*(3.0-2.0*f);
+                return mix(a, b, u.x) + (c - a)* u.y * (1.0 - u.x) + (d - b) * u.x * u.y;
+            }
+
+            void main() {
+                vec3 temp = position;
+                // Add wave movement via noise
+                temp.z = noise(temp.xy + vec2(0.0, time * 0.5)) * 0.3;
+                
+                vec4 mvPosition = modelViewMatrix * vec4(temp, 1.0);
+                gl_PointSize = size * ( scale / - mvPosition.z );
+                vFogDepth = -mvPosition.z;
+                gl_Position = projectionMatrix * mvPosition;
+            }
+        `;
+
+        const fragmentShader = `
+            uniform vec3 diffuse; 
+            varying float vFogDepth; 
+            void main() { 
+                // Create circle particles
+                if (length(gl_PointCoord - 0.5) > 0.5) discard; 
+                // Fade distant particles
+                gl_FragColor = vec4(diffuse, 1.4 / vFogDepth); 
+            }
+        `;
+
+        // 3. Create Grid Geometry
+        const geometry = new THREE.BufferGeometry();
+        const res = 180; // Grid resolution
+        const pos = new Float32Array(res * res * 3);
+        
+        for(let i = 0; i < res; i++) {
+            for(let j = 0; j < res; j++) {
+                const index = (i * res + j) * 3;
+                pos[index + 0] = 5 * (2 * j / (res - 1) - 1); // X
+                pos[index + 1] = 12 * i / (res - 1);          // Y
+                // Z is handled by shader
+            }
+        }
+        geometry.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+
+        // 4. Material & Mesh
+        const material = new THREE.ShaderMaterial({ 
+            uniforms: { 
+                diffuse: { value: new THREE.Color(0xFFD700) }, 
+                size: { value: 20 }, 
+                scale: { value: 1 }, 
+                time: { value: 0 } 
+            }, 
+            vertexShader, 
+            fragmentShader, 
+            transparent: true 
+        });
+
+        scene.add(new THREE.Points(geometry, material));
+
+        // 5. Animation Loop
+        const clock = new THREE.Clock();
+        
+        function animate() { 
+            material.uniforms.time.value += clock.getDelta(); 
+            renderer.render(scene, camera); 
+            requestAnimationFrame(animate); 
+        }
+        animate();
+
+        // 6. Handle Resize
+        window.addEventListener('resize', () => { 
+            camera.aspect = window.innerWidth / window.innerHeight; 
+            camera.updateProjectionMatrix(); 
+            renderer.setSize(window.innerWidth, window.innerHeight); 
+        });
+    </script>
+</body>
+</html>
