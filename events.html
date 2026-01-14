@@ -1,0 +1,968 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <title>
+   Events
+  </title>
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect"/>
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=Newsreader:ital,opsz,wght@1,6..72,300;1,6..72,400&amp;display=swap" rel="stylesheet"/>
+  <!-- Orbitron font -->
+  <link href="https://fonts.googleapis.com" rel="preconnect"/>
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+  <link href="https://fonts.googleapis.com/css2?family=Audiowide&amp;family=Orbitron:wght@400..900&amp;display=swap" rel="stylesheet"/>
+  <!-- Tektur font -->
+  <link href="https://fonts.googleapis.com" rel="preconnect"/>
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+  <link href="https://fonts.googleapis.com/css2?family=Audiowide&amp;family=Orbitron:wght@400..900&amp;family=Tektur:wght@400..900&amp;display=swap" rel="stylesheet"/>
+  <link href="static/home.css" rel="stylesheet">
+   <link href="static/events.css" rel="stylesheet">
+    <link href="static/components/navbar.css" rel="stylesheet">
+    </link>
+   </link>
+  </link>
+ </head>
+ <body>
+  <!-- Placeholder logo for mobile -->
+  <a class="logo-placeholder" href="index.html">
+   LOGO
+  </a>
+  <!-- Center navbar for desktop -->
+  <nav aria-label="Primary navigation" class="center-navbar" style="margin-top: 0;">
+   <a aria-label="Home" class="nav-logo" href="index.html">
+    LOGO
+   </a>
+   <ul class="nav-links">
+    <li>
+     <a class="nav-link" href="index.html">
+      home
+     </a>
+    </li>
+    <li>
+     <a class="nav-link" href="#">
+      x-cryptus
+     </a>
+    </li>
+    <li>
+     <a class="nav-link" href="#">
+      about-us
+     </a>
+    </li>
+    <li>
+     <a class="nav-link" href="#">
+      contact-us
+     </a>
+    </li>
+   </ul>
+  </nav>
+  <!-- Hamburger menu button for mobile -->
+  <button aria-expanded="false" aria-label="Open menu" class="menu-toggle" id="menuToggle">
+   <svg fill="none" height="24" id="menuIcon" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="24">
+    <path d="M4 6h16M4 12h16M4 18h16">
+    </path>
+   </svg>
+   <svg fill="none" height="24" id="closeIcon" stroke="currentColor" stroke-width="2" style="opacity:0; visibility:hidden;" viewbox="0 0 24 24" width="24">
+    <path d="M18 6L6 18M6 6l12 12">
+    </path>
+   </svg>
+  </button>
+  <!-- Menu -->
+  <div aria-hidden="true" class="menu-overlay" id="mainMenu">
+   <div aria-label="Main menu" aria-modal="true" class="menu-panel" id="menuPanel" role="dialog">
+    <button aria-label="Close menu" class="panel-close" id="panelClose">
+     <svg fill="none" height="20" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="20">
+      <path d="M18 6L6 18M6 6l12 12">
+      </path>
+     </svg>
+    </button>
+    <nav aria-label="Primary" class="panel-nav">
+     <a class="panel-link" href="#" style="font-size: 20px;">
+      home
+     </a>
+     <a class="panel-link" href="#" style="font-size: 20px;">
+      x-cryptus
+     </a>
+     <a class="panel-link" href="#" style="font-size: 20px;">
+      about-us
+     </a>
+     <a class="panel-link" href="#" style="font-size: 20px;">
+      contact-us
+     </a>
+    </nav>
+   </div>
+  </div>
+  <canvas id="background" style="
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    display: block;
+    filter: blur(4px) brightness(0.4);
+    z-index: -1;">
+  </canvas>
+  <section class="section">
+   <div class="hero-events tektur-font">
+    events
+   </div>
+  </section>
+  <section class="intro-section">
+   <p class="tektur-font">
+    A huge collection of events. I don't know what else to write here.
+   </p>
+  </section>
+  <section class="events-section container">
+   <div class="events-left">
+    <h2 class="online-title tektur-font">
+     online events
+    </h2>
+   </div>
+   <div class="events-right">
+    <div class="cards-grid">
+     <div class="card" data-popup-id="online-1">
+      <div class="card-body">
+       <div class="card-title tektur-font">
+        TBD
+       </div>
+       <div class="card-meta tektur-font">
+        Details coming soon
+       </div>
+       <a class="register-btn tektur-font" data-event-id="online-1" href="#">
+        Register
+       </a>
+      </div>
+     </div>
+     <div class="card" data-popup-id="online-2">
+      <div class="card-body">
+       <div class="card-title tektur-font">
+        TBD
+       </div>
+       <div class="card-meta tektur-font">
+        Details coming soon
+       </div>
+       <a class="register-btn tektur-font" data-event-id="online-2" href="#">
+        Register
+       </a>
+      </div>
+     </div>
+     <div class="card" data-popup-id="online-3">
+      <div class="card-body">
+       <div class="card-title tektur-font">
+        TBD
+       </div>
+       <div class="card-meta tektur-font">
+        Details coming soon
+       </div>
+       <a class="register-btn tektur-font" data-event-id="online-3" href="#">
+        Register
+       </a>
+      </div>
+     </div>
+     <div class="card" data-popup-id="online-4">
+      <div class="card-body">
+       <div class="card-title tektur-font">
+        TBD
+       </div>
+       <div class="card-meta tektur-font">
+        Details coming soon
+       </div>
+       <a class="register-btn tektur-font" data-event-id="online-4" href="#">
+        Register
+       </a>
+      </div>
+     </div>
+     <div class="card" data-popup-id="online-5">
+      <div class="card-body">
+       <div class="card-title tektur-font">
+        TBD
+       </div>
+       <div class="card-meta tektur-font">
+        Details coming soon
+       </div>
+       <a class="register-btn tektur-font" data-event-id="online-5" href="#">
+        Register
+       </a>
+      </div>
+     </div>
+     <div class="card" data-popup-id="online-6">
+      <div class="card-body">
+       <div class="card-title tektur-font">
+        TBD
+       </div>
+       <div class="card-meta tektur-font">
+        Details coming soon
+       </div>
+       <a class="register-btn tektur-font" data-event-id="online-6" href="#">
+        Register
+       </a>
+      </div>
+     </div>
+     <div class="card" data-popup-id="online-7">
+      <div class="card-body">
+       <div class="card-title tektur-font">
+        TBD
+       </div>
+       <div class="card-meta tektur-font">
+        Details coming soon
+       </div>
+       <a class="register-btn tektur-font" data-event-id="online-7" href="#">
+        Register
+       </a>
+      </div>
+     </div>
+     <div class="card" data-popup-id="online-8">
+      <div class="card-body">
+       <div class="card-title tektur-font">
+        TBD
+       </div>
+       <div class="card-meta tektur-font">
+        Details coming soon
+       </div>
+       <a class="register-btn tektur-font" data-event-id="online-8" href="#">
+        Register
+       </a>
+      </div>
+     </div>
+     <div class="card" data-popup-id="online-9">
+      <div class="card-body">
+       <div class="card-title tektur-font">
+        TBD
+       </div>
+       <div class="card-meta tektur-font">
+        Details coming soon
+       </div>
+       <a class="register-btn tektur-font" data-event-id="online-9" href="#">
+        Register
+       </a>
+      </div>
+     </div>
+    </div>
+   </div>
+  </section>
+  <section class="events-section container">
+   <div class="events-left">
+    <h2 class="online-title tektur-font">
+     offline events
+    </h2>
+   </div>
+   <div class="events-right">
+    <div class="cards-grid">
+     <div class="card" data-popup-id="offline-1">
+      <div class="card-body">
+       <div class="card-title tektur-font">
+        TBD
+       </div>
+       <div class="card-meta tektur-font">
+        Details coming soon
+       </div>
+       <a class="register-btn tektur-font" data-event-id="offline-1" href="#">
+        Register
+       </a>
+      </div>
+     </div>
+     <div class="card" data-popup-id="offline-2">
+      <div class="card-body">
+       <div class="card-title tektur-font">
+        TBD
+       </div>
+       <div class="card-meta tektur-font">
+        Details coming soon
+       </div>
+       <a class="register-btn tektur-font" data-event-id="offline-2" href="#">
+        Register
+       </a>
+      </div>
+     </div>
+     <div class="card" data-popup-id="offline-3">
+      <div class="card-body">
+       <div class="card-title tektur-font">
+        TBD
+       </div>
+       <div class="card-meta tektur-font">
+        Details coming soon
+       </div>
+       <a class="register-btn tektur-font" data-event-id="offline-3" href="#">
+        Register
+       </a>
+      </div>
+     </div>
+     <div class="card" data-popup-id="offline-4">
+      <div class="card-body">
+       <div class="card-title tektur-font">
+        TBD
+       </div>
+       <div class="card-meta tektur-font">
+        Details coming soon
+       </div>
+       <a class="register-btn tektur-font" data-event-id="offline-4" href="#">
+        Register
+       </a>
+      </div>
+     </div>
+     <div class="card" data-popup-id="offline-5">
+      <div class="card-body">
+       <div class="card-title tektur-font">
+        TBD
+       </div>
+       <div class="card-meta tektur-font">
+        Details coming soon
+       </div>
+       <a class="register-btn tektur-font" data-event-id="offline-5" href="#">
+        Register
+       </a>
+      </div>
+     </div>
+     <div class="card" data-popup-id="offline-6">
+      <div class="card-body">
+       <div class="card-title tektur-font">
+        TBD
+       </div>
+       <div class="card-meta tektur-font">
+        Details coming soon
+       </div>
+       <a class="register-btn tektur-font" data-event-id="offline-6" href="#">
+        Register
+       </a>
+      </div>
+     </div>
+     <div class="card" data-popup-id="offline-7">
+      <div class="card-body">
+       <div class="card-title tektur-font">
+        TBD
+       </div>
+       <div class="card-meta tektur-font">
+        Details coming soon
+       </div>
+       <a class="register-btn tektur-font" data-event-id="offline-7" href="#">
+        Register
+       </a>
+      </div>
+     </div>
+     <div class="card" data-popup-id="offline-8">
+      <div class="card-body">
+       <div class="card-title tektur-font">
+        TBD
+       </div>
+       <div class="card-meta tektur-font">
+        Details coming soon
+       </div>
+       <a class="register-btn tektur-font" data-event-id="offline-8" href="#">
+        Register
+       </a>
+      </div>
+     </div>
+     <div class="card" data-popup-id="offline-9">
+      <div class="card-body">
+       <div class="card-title tektur-font">
+        TBD
+       </div>
+       <div class="card-meta tektur-font">
+        Details coming soon
+       </div>
+       <a class="register-btn tektur-font" data-event-id="offline-9" href="#">
+        Register
+       </a>
+      </div>
+     </div>
+    </div>
+   </div>
+  </section>
+  <div aria-hidden="true" class="event-popup menu-overlay" id="popup-online-1">
+   <div aria-label="Event details" aria-modal="true" class="menu-panel event-details-panel" role="dialog">
+    <button aria-label="Close event details" class="panel-close popup-close">
+     <svg fill="none" height="20" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="20">
+      <path d="M18 6L6 18M6 6l12 12">
+      </path>
+     </svg>
+    </button>
+    <h2 class="event-popup-title tektur-font">
+     Online Event 1
+    </h2>
+    <div class="event-rules-section">
+     <h3 class="rules-heading tektur-font">
+      Rules
+     </h3>
+     <ul class="rules-list">
+      <li class="tektur-font">
+       Details coming soon
+      </li>
+      <li class="tektur-font">
+       Details coming soon
+      </li>
+      <li class="tektur-font">
+       Details coming soon
+      </li>
+     </ul>
+    </div>
+    <button class="event-register-btn tektur-font">
+     Register
+    </button>
+   </div>
+  </div>
+  <div aria-hidden="true" class="event-popup menu-overlay" id="popup-online-2">
+   <div aria-label="Event details" aria-modal="true" class="menu-panel event-details-panel" role="dialog">
+    <button aria-label="Close event details" class="panel-close popup-close">
+     <svg fill="none" height="20" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="20">
+      <path d="M18 6L6 18M6 6l12 12">
+      </path>
+     </svg>
+    </button>
+    <h2 class="event-popup-title tektur-font">
+     Online Event 2
+    </h2>
+    <div class="event-rules-section">
+     <h3 class="rules-heading tektur-font">
+      Rules
+     </h3>
+     <ul class="rules-list">
+      <li class="tektur-font">
+       Details coming soon
+      </li>
+      <li class="tektur-font">
+       Details coming soon
+      </li>
+      <li class="tektur-font">
+       Details coming soon
+      </li>
+     </ul>
+    </div>
+    <button class="event-register-btn tektur-font">
+     Register
+    </button>
+   </div>
+  </div>
+  <div aria-hidden="true" class="event-popup menu-overlay" id="popup-online-3">
+   <div aria-label="Event details" aria-modal="true" class="menu-panel event-details-panel" role="dialog">
+    <button aria-label="Close event details" class="panel-close popup-close">
+     <svg fill="none" height="20" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="20">
+      <path d="M18 6L6 18M6 6l12 12">
+      </path>
+     </svg>
+    </button>
+    <h2 class="event-popup-title tektur-font">
+     Online Event 3
+    </h2>
+    <div class="event-rules-section">
+     <h3 class="rules-heading tektur-font">
+      Rules
+     </h3>
+     <ul class="rules-list">
+      <li class="tektur-font">
+       Details coming soon
+      </li>
+      <li class="tektur-font">
+       Details coming soon
+      </li>
+      <li class="tektur-font">
+       Details coming soon
+      </li>
+     </ul>
+    </div>
+    <button class="event-register-btn tektur-font">
+     Register
+    </button>
+   </div>
+  </div>
+  <div aria-hidden="true" class="event-popup menu-overlay" id="popup-online-4">
+   <div aria-label="Event details" aria-modal="true" class="menu-panel event-details-panel" role="dialog">
+    <button aria-label="Close event details" class="panel-close popup-close">
+     <svg fill="none" height="20" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="20">
+      <path d="M18 6L6 18M6 6l12 12">
+      </path>
+     </svg>
+    </button>
+    <h2 class="event-popup-title tektur-font">
+     Online Event 4
+    </h2>
+    <div class="event-rules-section">
+     <h3 class="rules-heading tektur-font">
+      Rules
+     </h3>
+     <ul class="rules-list">
+      <li class="tektur-font">
+       Details coming soon
+      </li>
+      <li class="tektur-font">
+       Details coming soon
+      </li>
+      <li class="tektur-font">
+       Details coming soon
+      </li>
+     </ul>
+    </div>
+    <button class="event-register-btn tektur-font">
+     Register
+    </button>
+   </div>
+  </div>
+  <div aria-hidden="true" class="event-popup menu-overlay" id="popup-online-5">
+   <div aria-label="Event details" aria-modal="true" class="menu-panel event-details-panel" role="dialog">
+    <button aria-label="Close event details" class="panel-close popup-close">
+     <svg fill="none" height="20" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="20">
+      <path d="M18 6L6 18M6 6l12 12">
+      </path>
+     </svg>
+    </button>
+    <h2 class="event-popup-title tektur-font">
+     Online Event 5
+    </h2>
+    <div class="event-rules-section">
+     <h3 class="rules-heading tektur-font">
+      Rules
+     </h3>
+     <ul class="rules-list">
+      <li class="tektur-font">
+       Details coming soon
+      </li>
+      <li class="tektur-font">
+       Details coming soon
+      </li>
+      <li class="tektur-font">
+       Details coming soon
+      </li>
+     </ul>
+    </div>
+    <button class="event-register-btn tektur-font">
+     Register
+    </button>
+   </div>
+  </div>
+  <div aria-hidden="true" class="event-popup menu-overlay" id="popup-online-6">
+   <div aria-label="Event details" aria-modal="true" class="menu-panel event-details-panel" role="dialog">
+    <button aria-label="Close event details" class="panel-close popup-close">
+     <svg fill="none" height="20" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="20">
+      <path d="M18 6L6 18M6 6l12 12">
+      </path>
+     </svg>
+    </button>
+    <h2 class="event-popup-title tektur-font">
+     Online Event 6
+    </h2>
+    <div class="event-rules-section">
+     <h3 class="rules-heading tektur-font">
+      Rules
+     </h3>
+     <ul class="rules-list">
+      <li class="tektur-font">
+       Details coming soon
+      </li>
+      <li class="tektur-font">
+       Details coming soon
+      </li>
+      <li class="tektur-font">
+       Details coming soon
+      </li>
+     </ul>
+    </div>
+    <button class="event-register-btn tektur-font">
+     Register
+    </button>
+   </div>
+  </div>
+  <div aria-hidden="true" class="event-popup menu-overlay" id="popup-online-7">
+   <div aria-label="Event details" aria-modal="true" class="menu-panel event-details-panel" role="dialog">
+    <button aria-label="Close event details" class="panel-close popup-close">
+     <svg fill="none" height="20" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="20">
+      <path d="M18 6L6 18M6 6l12 12">
+      </path>
+     </svg>
+    </button>
+    <h2 class="event-popup-title tektur-font">
+     Online Event 7
+    </h2>
+    <div class="event-rules-section">
+     <h3 class="rules-heading tektur-font">
+      Rules
+     </h3>
+     <ul class="rules-list">
+      <li class="tektur-font">
+       Details coming soon
+      </li>
+      <li class="tektur-font">
+       Details coming soon
+      </li>
+      <li class="tektur-font">
+       Details coming soon
+      </li>
+     </ul>
+    </div>
+    <button class="event-register-btn tektur-font">
+     Register
+    </button>
+   </div>
+  </div>
+  <div aria-hidden="true" class="event-popup menu-overlay" id="popup-online-8">
+   <div aria-label="Event details" aria-modal="true" class="menu-panel event-details-panel" role="dialog">
+    <button aria-label="Close event details" class="panel-close popup-close">
+     <svg fill="none" height="20" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="20">
+      <path d="M18 6L6 18M6 6l12 12">
+      </path>
+     </svg>
+    </button>
+    <h2 class="event-popup-title tektur-font">
+     Online Event 8
+    </h2>
+    <div class="event-rules-section">
+     <h3 class="rules-heading tektur-font">
+      Rules
+     </h3>
+     <ul class="rules-list">
+      <li class="tektur-font">
+       Details coming soon
+      </li>
+      <li class="tektur-font">
+       Details coming soon
+      </li>
+      <li class="tektur-font">
+       Details coming soon
+      </li>
+     </ul>
+    </div>
+    <button class="event-register-btn tektur-font">
+     Register
+    </button>
+   </div>
+  </div>
+  <div aria-hidden="true" class="event-popup menu-overlay" id="popup-online-9">
+   <div aria-label="Event details" aria-modal="true" class="menu-panel event-details-panel" role="dialog">
+    <button aria-label="Close event details" class="panel-close popup-close">
+     <svg fill="none" height="20" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="20">
+      <path d="M18 6L6 18M6 6l12 12">
+      </path>
+     </svg>
+    </button>
+    <h2 class="event-popup-title tektur-font">
+     Online Event 9
+    </h2>
+    <div class="event-rules-section">
+     <h3 class="rules-heading tektur-font">
+      Rules
+     </h3>
+     <ul class="rules-list">
+      <li class="tektur-font">
+       Details coming soon
+      </li>
+      <li class="tektur-font">
+       Details coming soon
+      </li>
+      <li class="tektur-font">
+       Details coming soon
+      </li>
+     </ul>
+    </div>
+    <button class="event-register-btn tektur-font">
+     Register
+    </button>
+   </div>
+  </div>
+  <div aria-hidden="true" class="event-popup menu-overlay" id="popup-offline-1">
+   <div aria-label="Event details" aria-modal="true" class="menu-panel event-details-panel" role="dialog">
+    <button aria-label="Close event details" class="panel-close popup-close">
+     <svg fill="none" height="20" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="20">
+      <path d="M18 6L6 18M6 6l12 12">
+      </path>
+     </svg>
+    </button>
+    <h2 class="event-popup-title tektur-font">
+     Offline Event 1
+    </h2>
+    <div class="event-rules-section">
+     <h3 class="rules-heading tektur-font">
+      Rules
+     </h3>
+     <ul class="rules-list">
+      <li class="tektur-font">
+       Details coming soon
+      </li>
+      <li class="tektur-font">
+       Details coming soon
+      </li>
+      <li class="tektur-font">
+       Details coming soon
+      </li>
+     </ul>
+    </div>
+    <button class="event-register-btn tektur-font">
+     Register
+    </button>
+   </div>
+  </div>
+  <div aria-hidden="true" class="event-popup menu-overlay" id="popup-offline-2">
+   <div aria-label="Event details" aria-modal="true" class="menu-panel event-details-panel" role="dialog">
+    <button aria-label="Close event details" class="panel-close popup-close">
+     <svg fill="none" height="20" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="20">
+      <path d="M18 6L6 18M6 6l12 12">
+      </path>
+     </svg>
+    </button>
+    <h2 class="event-popup-title tektur-font">
+     Offline Event 2
+    </h2>
+    <div class="event-rules-section">
+     <h3 class="rules-heading tektur-font">
+      Rules
+     </h3>
+     <ul class="rules-list">
+      <li class="tektur-font">
+       Details coming soon
+      </li>
+      <li class="tektur-font">
+       Details coming soon
+      </li>
+      <li class="tektur-font">
+       Details coming soon
+      </li>
+     </ul>
+    </div>
+    <button class="event-register-btn tektur-font">
+     Register
+    </button>
+   </div>
+  </div>
+  <div aria-hidden="true" class="event-popup menu-overlay" id="popup-offline-3">
+   <div aria-label="Event details" aria-modal="true" class="menu-panel event-details-panel" role="dialog">
+    <button aria-label="Close event details" class="panel-close popup-close">
+     <svg fill="none" height="20" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="20">
+      <path d="M18 6L6 18M6 6l12 12">
+      </path>
+     </svg>
+    </button>
+    <h2 class="event-popup-title tektur-font">
+     Offline Event 3
+    </h2>
+    <div class="event-rules-section">
+     <h3 class="rules-heading tektur-font">
+      Rules
+     </h3>
+     <ul class="rules-list">
+      <li class="tektur-font">
+       Details coming soon
+      </li>
+      <li class="tektur-font">
+       Details coming soon
+      </li>
+      <li class="tektur-font">
+       Details coming soon
+      </li>
+     </ul>
+    </div>
+    <button class="event-register-btn tektur-font">
+     Register
+    </button>
+   </div>
+  </div>
+  <div aria-hidden="true" class="event-popup menu-overlay" id="popup-offline-4">
+   <div aria-label="Event details" aria-modal="true" class="menu-panel event-details-panel" role="dialog">
+    <button aria-label="Close event details" class="panel-close popup-close">
+     <svg fill="none" height="20" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="20">
+      <path d="M18 6L6 18M6 6l12 12">
+      </path>
+     </svg>
+    </button>
+    <h2 class="event-popup-title tektur-font">
+     Offline Event 4
+    </h2>
+    <div class="event-rules-section">
+     <h3 class="rules-heading tektur-font">
+      Rules
+     </h3>
+     <ul class="rules-list">
+      <li class="tektur-font">
+       Details coming soon
+      </li>
+      <li class="tektur-font">
+       Details coming soon
+      </li>
+      <li class="tektur-font">
+       Details coming soon
+      </li>
+     </ul>
+    </div>
+    <button class="event-register-btn tektur-font">
+     Register
+    </button>
+   </div>
+  </div>
+  <div aria-hidden="true" class="event-popup menu-overlay" id="popup-offline-5">
+   <div aria-label="Event details" aria-modal="true" class="menu-panel event-details-panel" role="dialog">
+    <button aria-label="Close event details" class="panel-close popup-close">
+     <svg fill="none" height="20" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="20">
+      <path d="M18 6L6 18M6 6l12 12">
+      </path>
+     </svg>
+    </button>
+    <h2 class="event-popup-title tektur-font">
+     Offline Event 5
+    </h2>
+    <div class="event-rules-section">
+     <h3 class="rules-heading tektur-font">
+      Rules
+     </h3>
+     <ul class="rules-list">
+      <li class="tektur-font">
+       Details coming soon
+      </li>
+      <li class="tektur-font">
+       Details coming soon
+      </li>
+      <li class="tektur-font">
+       Details coming soon
+      </li>
+     </ul>
+    </div>
+    <button class="event-register-btn tektur-font">
+     Register
+    </button>
+   </div>
+  </div>
+  <div aria-hidden="true" class="event-popup menu-overlay" id="popup-offline-6">
+   <div aria-label="Event details" aria-modal="true" class="menu-panel event-details-panel" role="dialog">
+    <button aria-label="Close event details" class="panel-close popup-close">
+     <svg fill="none" height="20" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="20">
+      <path d="M18 6L6 18M6 6l12 12">
+      </path>
+     </svg>
+    </button>
+    <h2 class="event-popup-title tektur-font">
+     Offline Event 6
+    </h2>
+    <div class="event-rules-section">
+     <h3 class="rules-heading tektur-font">
+      Rules
+     </h3>
+     <ul class="rules-list">
+      <li class="tektur-font">
+       Details coming soon
+      </li>
+      <li class="tektur-font">
+       Details coming soon
+      </li>
+      <li class="tektur-font">
+       Details coming soon
+      </li>
+     </ul>
+    </div>
+    <button class="event-register-btn tektur-font">
+     Register
+    </button>
+   </div>
+  </div>
+  <div aria-hidden="true" class="event-popup menu-overlay" id="popup-offline-7">
+   <div aria-label="Event details" aria-modal="true" class="menu-panel event-details-panel" role="dialog">
+    <button aria-label="Close event details" class="panel-close popup-close">
+     <svg fill="none" height="20" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="20">
+      <path d="M18 6L6 18M6 6l12 12">
+      </path>
+     </svg>
+    </button>
+    <h2 class="event-popup-title tektur-font">
+     Offline Event 7
+    </h2>
+    <div class="event-rules-section">
+     <h3 class="rules-heading tektur-font">
+      Rules
+     </h3>
+     <ul class="rules-list">
+      <li class="tektur-font">
+       Details coming soon
+      </li>
+      <li class="tektur-font">
+       Details coming soon
+      </li>
+      <li class="tektur-font">
+       Details coming soon
+      </li>
+     </ul>
+    </div>
+    <button class="event-register-btn tektur-font">
+     Register
+    </button>
+   </div>
+  </div>
+  <div aria-hidden="true" class="event-popup menu-overlay" id="popup-offline-8">
+   <div aria-label="Event details" aria-modal="true" class="menu-panel event-details-panel" role="dialog">
+    <button aria-label="Close event details" class="panel-close popup-close">
+     <svg fill="none" height="20" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="20">
+      <path d="M18 6L6 18M6 6l12 12">
+      </path>
+     </svg>
+    </button>
+    <h2 class="event-popup-title tektur-font">
+     Offline Event 8
+    </h2>
+    <div class="event-rules-section">
+     <h3 class="rules-heading tektur-font">
+      Rules
+     </h3>
+     <ul class="rules-list">
+      <li class="tektur-font">
+       Details coming soon
+      </li>
+      <li class="tektur-font">
+       Details coming soon
+      </li>
+      <li class="tektur-font">
+       Details coming soon
+      </li>
+     </ul>
+    </div>
+    <button class="event-register-btn tektur-font">
+     Register
+    </button>
+   </div>
+  </div>
+  <div aria-hidden="true" class="event-popup menu-overlay" id="popup-offline-9">
+   <div aria-label="Event details" aria-modal="true" class="menu-panel event-details-panel" role="dialog">
+    <button aria-label="Close event details" class="panel-close popup-close">
+     <svg fill="none" height="20" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="20">
+      <path d="M18 6L6 18M6 6l12 12">
+      </path>
+     </svg>
+    </button>
+    <h2 class="event-popup-title tektur-font">
+     Offline Event 9
+    </h2>
+    <div class="event-rules-section">
+     <h3 class="rules-heading tektur-font">
+      Rules
+     </h3>
+     <ul class="rules-list">
+      <li class="tektur-font">
+       Details coming soon
+      </li>
+      <li class="tektur-font">
+       Details coming soon
+      </li>
+      <li class="tektur-font">
+       Details coming soon
+      </li>
+     </ul>
+    </div>
+    <button class="event-register-btn tektur-font">
+     Register
+    </button>
+   </div>
+  </div>
+  <!-- GSAP for animation -->
+  <script crossorigin="anonymous" integrity="sha512-NcZdtrT77bJr4STcmsGAESr06BYGE8woZdSdEgqnpyqac7sugNO+Tr4bGwGF3MsnEkGKhU2KL2xh6Ec+BqsaHA==" referrerpolicy="no-referrer" src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js">
+  </script>
+  <script src="static/home.js">
+  </script>
+  <script src="static/events.js">
+  </script>
+  <!-- Background Effects -->
+  <script type="importmap">
+   {
+            "imports" : {
+                  "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+                  "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+            }
+        }
+  </script>
+  <script src="static/3d-sea.js" type="module">
+  </script>
+ </body>
+</html>
