@@ -71,4 +71,4 @@ pages_data = convert_to_json(PAGES_CONTENT_DIR)
 for k, v in components_data.items():
     env.globals[k] = v
 
-app.run()
+app.run('0.0.0.0', port=8000)

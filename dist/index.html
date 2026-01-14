@@ -10,107 +10,111 @@
   <link href="https://fonts.googleapis.com" rel="preconnect"/>
   <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=Newsreader:ital,opsz,wght@1,6..72,300;1,6..72,400&amp;display=swap" rel="stylesheet"/>
+  <!-- Orbitron font -->
+  <link href="https://fonts.googleapis.com" rel="preconnect"/>
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+  <link href="https://fonts.googleapis.com/css2?family=Audiowide&amp;family=Orbitron:wght@400..900&amp;display=swap" rel="stylesheet"/>
+  <!-- Tektur font -->
+  <link href="https://fonts.googleapis.com" rel="preconnect"/>
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+  <link href="https://fonts.googleapis.com/css2?family=Audiowide&amp;family=Orbitron:wght@400..900&amp;family=Tektur:wght@400..900&amp;display=swap" rel="stylesheet"/>
   <!-- Stylesheet -->
-  <link href="static/home.css" rel="stylesheet"/>
+  <link href="static/home.css" rel="stylesheet">
+  </link>
  </head>
  <body>
+  <!-- Placeholder logo at top-left (mobile only) -->
+  <a class="logo-placeholder" href="index.html">
+   LOGO
+  </a>
+  <!-- Center Navbar (desktop only) -->
+  <nav aria-label="Primary navigation" class="center-navbar">
+   <a aria-label="Home" class="nav-logo" href="index.html">
+    LOGO
+   </a>
+   <ul class="nav-links">
+    <li>
+     <a class="nav-link" href="#">
+      x-cryptus
+     </a>
+    </li>
+    <li>
+     <a class="nav-link" href="events.html">
+      events
+     </a>
+    </li>
+    <li>
+     <a class="nav-link" href="#">
+      about-us
+     </a>
+    </li>
+    <li>
+     <a class="nav-link" href="#">
+      contact-us
+     </a>
+    </li>
+   </ul>
+  </nav>
+  <!-- Hamburger button -->
+  <button aria-expanded="false" aria-label="Open menu" class="menu-toggle" id="menuToggle">
+   <svg fill="none" height="24" id="menuIcon" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="24">
+    <path d="M4 6h16M4 12h16M4 18h16">
+    </path>
+   </svg>
+   <svg fill="none" height="24" id="closeIcon" stroke="currentColor" stroke-width="2" style="opacity:0; visibility:hidden;" viewbox="0 0 24 24" width="24">
+    <path d="M18 6L6 18M6 6l12 12">
+    </path>
+   </svg>
+  </button>
+  <!-- Menu overlay -->
+  <div aria-hidden="true" class="menu-overlay" id="mainMenu">
+   <div aria-label="Main menu" aria-modal="true" class="menu-panel" id="menuPanel" role="dialog">
+    <button aria-label="Close menu" class="panel-close" id="panelClose">
+     <svg fill="none" height="20" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="20">
+      <path d="M18 6L6 18M6 6l12 12">
+      </path>
+     </svg>
+    </button>
+    <nav aria-label="Primary" class="panel-nav">
+     <a class="panel-link" href="#" style="font-size: 20px;">
+      x-cryptus
+     </a>
+     <a class="panel-link" href="#" style="font-size: 20px;">
+      sponsors
+     </a>
+     <a class="panel-link" href="#" style="font-size: 20px;">
+      about-us
+     </a>
+     <a class="panel-link" href="#" style="font-size: 20px;">
+      contact-us
+     </a>
+    </nav>
+   </div>
+  </div>
   <!-- Main Hero Content -->
   <main class="container">
    <canvas id="background" style="
-    position: absolute;
+    position: fixed;
     left: 0px;
     top: 0px;
     width: 100%;
     height: 100%;
-    display: block;">
+    display: block;
+    z-index: -1;">
    </canvas>
-   <nav class="navbar" id="navbar">
-    <!-- Desktop Nav -->
-    <div class="nav-container hidden lg:flex" id="navContainer">
-     <a class="logo" href="#">
-      <div class="logo-circle">
-      </div>
-      <span class="font-medium text-white">
-       eXabyte
-      </span>
-     </a>
-     <div class="nav-items" id="navItems">
-      <div class="gooey-bg" id="gooeyBg">
-      </div>
-      <a class="nav-link" href="x-cryptus.html">
-       <span>
-        x-cryptus
-       </span>
-      </a>
-      <a class="nav-link" href="#">
-       <span>
-        sponsors
-       </span>
-      </a>
-      <a class="nav-link" href="#">
-       <span>
-        about-us
-       </span>
-      </a>
-      <a class="nav-link" href="#">
-       <span>
-        contact-us
-       </span>
-      </a>
-     </div>
-     <a class="btn-primary" href="#" id="desktopBtn">
-      Register
-     </a>
-    </div>
-    <!-- Mobile Nav -->
-    <div class="mobile-nav-container lg:hidden" id="mobileContainer">
-     <div class="flex items-center justify-between w-full">
-      <a class="logo" href="#">
-       <div class="logo-circle">
-       </div>
-       <span class="font-medium text-white">
-        eXabyte
-       </span>
-      </a>
-      <button class="text-white relative" id="menuToggle" style="
-                width: 24px;
-                height: 24px;
-                background: none;
-                border: none;
-                cursor: pointer;
-              ">
-       <svg fill="none" height="24" id="menuIcon" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="24">
-        <path d="M4 6h16M4 12h16M4 18h16">
-        </path>
-       </svg>
-       <svg class="absolute inset-0" fill="none" height="24" id="closeIcon" stroke="currentColor" stroke-width="2" style="opacity: 0; visibility: hidden" viewbox="0 0 24 24" width="24">
-        <path d="M18 6L6 18M6 6l12 12">
-        </path>
-       </svg>
-      </button>
-     </div>
-     <div class="mobile-menu" id="mobileMenu">
-      <a class="mobile-link" href="#">
-       x-cryptus
-      </a>
-      <a class="mobile-link" href="#">
-       sponsors Me
-      </a>
-      <a class="mobile-link" href="#">
-       about-us
-      </a>
-      <a class="mobile-link" href="#">
-       contact-us
-      </a>
-      <a class="btn-primary text-center" href="#">
-       Register
-      </a>
-     </div>
-    </div>
-   </nav>
-   <!-- Left Column: Copy -->
    <div class="content-left">
-    <h4 class="status-badge">
+    <h2 class="white-text dept-badge tektur-font" style="font-size: 22px;">
+     From the Postgraduate and Research Department of Computer Science
+    </h2>
+    <h1 class="tektur-font" id="main-title">
+     eXabyte '26
+    </h1>
+    <h2 aria-hidden="true" class="white-text tektur-font" data-text="exploring a realm of innovation through iteration." id="subtitle">
+    </h2>
+    <p class="location tektur-font">
+     St. Xavier's College [Autonomous], Kolkata
+    </p>
+    <h3 class="status-badge tektur-font" style="font-size: 18px; margin-top: 10px;">
      <span class="pulse-dot">
       <span class="pulse-dot-ping">
       </span>
@@ -118,18 +122,8 @@
       </span>
      </span>
      18th &amp; 19th March, 2026.
-    </h4>
-    <h1>
-     eXabyte '26 ~ exploring
-     <br/>
-     <span class="white-text">
-      a realm of innovation through iteration.
-     </span>
-    </h1>
-    <p class="location">
-     St. Xavier's College [Autonomous], Kolkata
-    </p>
-    <p class="address">
+    </h3>
+    <p class="address tektur-font">
      30, Mother Teresa Sarani,
      <br/>
      Mullick Bazar, Park Street area,
@@ -137,16 +131,20 @@
      Kolkata, West Bengal - 700016.
     </p>
     <div class="cta-container">
-     <button class="shiny-cta">
+     <a class="shiny-cta orbitron-font" href="events.html">
       <span>
        Register
       </span>
-     </button>
+     </a>
     </div>
    </div>
-   <!-- Right Column: Abstract UI Visualization -->
   </main>
   <!-- GSAP -->
+  <script>
+   window.addEventListener("load", () => {
+        document.body.classList.add("page-loaded");
+      });
+  </script>
   <script crossorigin="anonymous" integrity="sha512-NcZdtrT77bJr4STcmsGAESr06BYGE8woZdSdEgqnpyqac7sugNO+Tr4bGwGF3MsnEkGKhU2KL2xh6Ec+BqsaHA==" referrerpolicy="no-referrer" src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js">
   </script>
   <script src="static/home.js">
