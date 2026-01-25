@@ -6,7 +6,7 @@ function handleScroll() {
 
     const visibilityThreshold = vw > 768 ? 0.5 : 0.3;
     const styles = window.getComputedStyle(elements[0]);
-    const stickyThreshold = parseFloat(styles.top); 
+    const stickyThreshold = parseFloat(styles.top);
 
     const elementsArray = Array.from(elements);
 
@@ -14,7 +14,7 @@ function handleScroll() {
         const rect = el.getBoundingClientRect();
         const elementHeight = el.offsetHeight;
         const triggerPoint = vh - (elementHeight * visibilityThreshold);
-        
+
         if (rect.top < triggerPoint) {
             el.style.opacity = "1";
         } else {
@@ -32,3 +32,14 @@ function handleScroll() {
 
 window.addEventListener('scroll', handleScroll);
 window.addEventListener('resize', handleScroll);
+
+const cards = document.querySelectorAll('.people-card');
+
+cards.forEach(card => {
+    card.addEventListener('click', function (e) {
+        if (window.innerWidth <= 768) {
+            this.classList.toggle('is-tapped');
+            cards.forEach(c => { if (c !== this) c.classList.remove('is-tapped'); });
+        }
+    });
+});

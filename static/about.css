@@ -2,6 +2,30 @@
     --gold: #ffd700;
     --card-bg: #0a0a0a;
 }
+@font-face {
+  font-family: "Whiplash";
+  src: url("fonts/cs-whiplash.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+body {
+  background-color: #000000;
+  color: #ffffff;
+  font-family: "Whiplash", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+}
+.tektur-font {
+    font-family: "Tektur", sans-serif !important;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    font-variation-settings:
+        "wdth" 100;
+}
 
 
 .abt-hero {
@@ -43,7 +67,7 @@
 }
 
 .team-division {
-    height: 70vh;
+    height: 75vh;
     margin-bottom: 10rem;
     padding: 1.5rem;
     position: sticky;
@@ -52,6 +76,12 @@
     backdrop-filter: blur(5px);
     opacity: 0;
     transition: opacity 0.3s ease-in-out;
+    overflow: hidden;
+    overflow-y: scroll;
+}
+
+.team-division::-webkit-scrollbar {
+    display: none;
 }
 
 .division-title {
@@ -61,6 +91,8 @@
     margin-bottom: 2rem;
     border-left: 0.25rem solid var(--gold);
     padding-left: 1rem;
+    position: sticky;
+    top: 0vh;
     backdrop-filter: blur(10px);
 }
 
@@ -178,40 +210,74 @@
 }
 
 /* Mobile Devices */
-
 @media (max-width: 480px) {
-    canvas{
+    canvas {
         filter: blur(3px) brightness(1);
     }
-    .abt-hero{
+
+    .abt-hero {
         height: 90vh;
     }
+
     .about-main-title {
         font-size: 4rem;
         margin-bottom: 1rem;
     }
-    .about-main-desc{
+
+    .about-main-desc {
         font-size: clamp(0.7rem, 1.5vw, 7rem);
     }
-    .team-division{
-        padding: 0!important;
+
+    .team-division {
+        padding: 0 !important;
         height: 100vh;
         top: 5vh;
     }
-    .people-row{
+
+    .people-row {
         flex-wrap: wrap;
     }
+
     .people-card {
         width: 45%;
         height: 15rem;
     }
+
     .card-info{
         padding: 1rem;
     }
-    .card-info h3{
+
+    .card-info h3 {
         font-size: 1rem;
     }
-    .card-info p{
+
+    .card-info p {
         font-size: 0.5rem;
+    }
+
+    /* .card-info {
+        background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 40%, transparent 100%);
+        top: auto;
+        bottom: 0;
+        padding: 1rem;
+    }
+
+    .card-overlay {
+        opacity: 1;
+        background: rgba(0, 0, 0, 0.3);
+        backdrop-filter: blur(2px);
+        height: 60px;
+        top: auto;
+        bottom: 0;
+        gap: 2rem;
+    }
+
+    .people-card:hover {
+        transform: none;
+        box-shadow: 0 5px 15px rgba(255, 215, 0, 0.2);
+    } */
+
+    .people-card.is-tapped .card-overlay {
+        opacity: 1;
     }
 }
