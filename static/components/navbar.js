@@ -39,7 +39,7 @@ cs_navbar_hamburger_button.addEventListener('touchstart', func)
 
 const title = document.querySelector('title').textContent
 for(const p of document.querySelectorAll('.cs-navbar nav a')) {
-    if(p.textContent.trim() == title) {
+    if(p.textContent.match(/\w+/)[0].toLowerCase() == title.toLowerCase()) {
         p.classList.add('cs-selected')
     }
 }
