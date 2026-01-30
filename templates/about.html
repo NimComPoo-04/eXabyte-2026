@@ -27,7 +27,7 @@
         rel="stylesheet">
 
     <!-- Stylesheet -->
-    <link rel="stylesheet" href="../static/about.css"> <!-- we include this because well we are in the about.html -->
+    <link rel="stylesheet" href="static/about.css"> <!-- we include this because well we are in the about.html -->
     <link rel="stylesheet" href="static/components/navbar.css" />
 </head>
 
@@ -38,10 +38,9 @@
     </div>
 
     <div class="abt-hero">
-        <h1 class="about-main-title tektur-font">Our Team</h1>
+        <h1 class="hero-events about-main-title tektur-font">Our Team</h1>
         <p class="about-main-desc tektur-font">The visionaries and builders behind the eXabyte ecosystem.</p>
     </div>
-    <div></div>
 
     <div class="about-wrapper">
         <!-- Convenor -->
@@ -542,15 +541,7 @@
     display: block;
     filter: blur(4px) brightness(0.7);
     z-index: -1;"></canvas>
-    <!-- <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            const cards = document.querySelectorAll('.people-card');
 
-            cards.forEach((card, index) => {
-                card.style.animationDelay = `${(index + 1) * 0.15}s`;
-            });
-        });
-    </script> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js"
         integrity="sha512-NcZdtrT77bJr4STcmsGAESr06BYGE8woZdSdEgqnpyqac7sugNO+Tr4bGwGF3MsnEkGKhU2KL2xh6Ec+BqsaHA=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -564,7 +555,9 @@
             }
         }
     </script>
+    <script src="static/home.js"></script>
     <script src="static/about.js"></script>
     <script src="static/3d-sea.js" type=module></script>
+    <script src="static/components/navbar.js"></script>
 
 </html>

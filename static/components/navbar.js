@@ -16,7 +16,7 @@ const cs_navbar_observer = new IntersectionObserver((e) => {
     threshold: 1.0,
 });
 
-cs_navbar_observer.observe(document.querySelector('.cs-navbar-view-checker'))
+// cs_navbar_observer.observe(document.querySelector('.cs-navbar-view-checker'))
 
 const cs_navbar_dialog = document.querySelector('.cs-hamburger-dialog');
 const cs_closer = document.querySelector('#cs-dailog-closer')
