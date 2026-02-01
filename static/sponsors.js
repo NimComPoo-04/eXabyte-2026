@@ -1,350 +1,366 @@
 import * as THREE from "three";
 
-const cs_navbar_observer = new IntersectionObserver((e) => {
-    const who = document.querySelector('.cs-navbar')
-    if (e[0].isIntersecting) {
-        who.classList.add('cs-navbar-collapsed');
-        who.classList.remove('cs-navbar-expanded');
-    } else {
-        who.classList.remove('cs-navbar-collapsed');
-        who.classList.add('cs-navbar-expanded');
+/* =========================================
+   1. THREE.JS BACKGROUND (Put this first so it always loads)
+   ========================================= */
+const canvas = document.getElementById('background');
+
+if (canvas) {
+    const scene = new THREE.Scene();
+    scene.fog = new THREE.Fog(0, 5, 10);
+
+    const camera = new THREE.PerspectiveCamera(25, window.innerWidth / window.innerHeight, 0.1, 1000);
+    const renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true }); // Alpha true for transparency
+
+    renderer.setPixelRatio(window.devicePixelRatio);
+    renderer.setSize(window.innerWidth, window.innerHeight);
+
+    window.addEventListener('resize', () => {
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+    });
+
+    // Custom Shaders for the "Flowing Dots" effect
+    const vertexShader = `
+    uniform float size; uniform float scale; uniform float time; varying float vFogDepth;
+    float random(vec2 co){ return fract(sin(dot(co, vec2(12.9898, 78.233))) * 43758.5453); }
+    float noise(vec2 st) {
+        vec2 i = floor(st); vec2 f = fract(st);
+        float s00 = random(i); float s01 = random(i + vec2(0.0, 1.0));
+        float s10 = random(i + vec2(1.0, 0.0)); float s11 = random(i + vec2(1.0, 1.0));
+        float dx1 = s10 - s00; float dx2 = s11 - s01; float dy1 = s01 - s00; float dy2 = s11 - s10;
+        float a = smoothstep(0.0, 1.0, f.x); float b = smoothstep(0.0, 1.0, f.y);
+        return s00 + a * dx1 + (1.0 - a) * b * dy1 + a * b * dy2;
     }
-}, { threshold: 1.0 });
+    void main() {
+        gl_PointSize = size;
+        vec3 temp = position;
+        temp.z = noise(temp.xy + vec2(0.0, time * 0.5)) * 0.3;
+        vec4 mvPosition = modelViewMatrix * vec4(temp, 1.0);
+        gl_PointSize *= (scale / -mvPosition.z);
+        vFogDepth = -mvPosition.z;
+        gl_Position = projectionMatrix * mvPosition;
+    }
+    `;
 
-const checker = document.querySelector('.cs-navbar-view-checker');
-if (checker) cs_navbar_observer.observe(checker);
+    const fragmentShader = `
+    uniform vec3 diffuse; uniform float fogNear; uniform float fogFar; uniform float fogDensity; uniform vec3 fogColor;
+    varying float vFogDepth;
+    void main() {
+        float d = length(gl_PointCoord - 0.5);
+        if (d > 0.5) discard;
+        gl_FragColor = vec4(mix(diffuse, fogColor, 0.0), 1.4 / vFogDepth);
+    }
+    `;
 
-const cs_navbar_dialog = document.querySelector('.cs-hamburger-dialog');
-const cs_closer = document.querySelector('#cs-dailog-closer');
+    // Grid Geometry
+    const geometry = new THREE.BufferGeometry();
+    const height = 12;
+    const width = 5;
+    const res = 180;
+    const position = new Float32Array(res * res * 3);
 
-cs_closer.addEventListener('touchstart', (e) => { cs_navbar_dialog.close(); e.stopPropagation(); });
-cs_closer.addEventListener('click', (e) => { cs_navbar_dialog.close(); e.stopPropagation(); });
-
-const cs_navbar_hamburger_button = document.querySelector('#cs-hamburger');
-
-function func(e) {
-    cs_navbar_hamburger_button.style.transform = 'scale(0.8)';
-    setTimeout(() => cs_navbar_hamburger_button.style.transform = 'scale(1)', 200);
-    cs_navbar_dialog.style.display = 'block';
-    cs_navbar_dialog.showModal();
-}
-
-cs_navbar_hamburger_button.addEventListener('click', func);
-cs_navbar_hamburger_button.addEventListener('touchstart', func);
-
-const title = document.querySelector('title').textContent;
-for (const p of document.querySelectorAll('.cs-navbar nav a')) {
-    if (p.textContent.trim() == title) p.classList.add('cs-selected');
-}
-
-const track = document.getElementById('track');
-const navPill = document.getElementById('navPill');
-const navItems = document.querySelectorAll('.nav-item');
-const sidebarText = document.getElementById('sidebarText');
-const tierTitle = document.getElementById('tierTitle');
-const tierSubtitle = document.getElementById('tierSubtitle');
-
-const tiers = [
-    { title: "GOLD PARTNERS", subtitle: "The Biggest Gs", color: "#ffea00", shadow: "0 0 20px rgba(255, 234, 0, 0.7)" },
-    { title: "SILVER PARTNERS", subtitle: "The Rock Solid Supports", color: "#C0C0C0", shadow: "0 0 20px rgba(192, 192, 192, 0.7)" },
-    { title: "BRONZE PARTNERS", subtitle: "The Trusted Allies", color: "#cd7f32", shadow: "0 0 20px rgba(205, 127, 50, 0.7)" }
-];
-
-let currentIndex = 0;
-const sections = document.querySelectorAll('.tier-section');
-sections[currentIndex].classList.add('active');
-
-navItems.forEach(item => {
-    item.addEventListener('click', () => {
-        const index = parseInt(item.getAttribute('data-index'));
-        currentIndex = index;
-        updateSlider();
-    });
-});
-
-function updateSlider() {
-    const percentage = currentIndex * -33.3333;
-    track.style.transform = `translateX(${percentage}%)`;
-
-    sections.forEach((section, index) => {
-        const grid = section.querySelector('.cards-grid');
-        if (index === currentIndex) {
-            section.classList.add('active');
-            if (grid && grid.__sliderInstance) {
-                grid.__sliderInstance.snapToIndex(0);
-            }
-        } else {
-            section.classList.remove('active');
+    for (let i = 0; i < res; i++) {
+        for (let j = 0; j < res; j++) {
+            const x = width * (2 * j / (res - 1) - 1);
+            const y = height * i / (res - 1);
+            const idx = (i * res + j) * 3;
+            position[idx] = x + (i % 2 === 0 ? width / res : 0);
+            position[idx + 1] = y;
+            position[idx + 2] = 0;
         }
-    });
+    }
+    geometry.setAttribute('position', new THREE.BufferAttribute(position, 3));
 
-    navItems.forEach((item, index) => {
-        item.classList.toggle('active', index === currentIndex);
-    });
+    const material = new THREE.ShaderMaterial(THREE.ShaderLib.points);
+    material.uniforms.diffuse.value = new THREE.Color(0xFFDA00);
+    material.uniforms.size.value = 20;
+    material.uniforms.time = { value: 0 };
+    material.defines.USE_SIZEATTENUATION = true;
+    material.fog = true;
+    material.transparent = true;
+    material.fragmentShader = fragmentShader;
+    material.vertexShader = vertexShader;
 
-    const currentTier = tiers[currentIndex];
-    navPill.style.borderColor = currentTier.color;
+    const plane = new THREE.Points(geometry, material);
+    scene.add(plane);
+    scene.add(new THREE.AmbientLight(0xFFFFFF, 1));
 
-    sidebarText.classList.add('fade-out');
+    camera.position.z = 0.3;
+    camera.position.y = 1;
+    camera.rotation.x = Math.PI / 2;
+    camera.rotation.z = -Math.PI / 6;
 
-    setTimeout(() => {
-        tierTitle.innerText = currentTier.title;
-        tierSubtitle.innerText = currentTier.subtitle;
-        tierTitle.style.color = currentTier.color;
-        tierTitle.style.textShadow = currentTier.shadow;
-        sidebarText.classList.remove('fade-out');
-    }, 300);
+    const clock = new THREE.Clock();
+
+    function animateBG() {
+        material.uniforms.time.value += clock.getDelta();
+        renderer.render(scene, camera);
+        requestAnimationFrame(animateBG);
+    }
+    animateBG();
 }
 
-class VerticalSlider {
+
+
+
+
+
+/* =========================================
+   2. UNIFIED VERTICAL SCROLLER
+   ========================================= */
+
+const TIER_CONFIG = {
+    gold:   { title: "SPONSORS",   subtitle: "The Biggest Gs",          color: "#ffea00", shadow: "rgba(255, 234, 0, 0.5)" },
+    silver: { title: "SPONSORS", subtitle: "The Rock Solid Supports", color: "#C0C0C0", shadow: "rgba(192, 192, 192, 0.5)" },
+    bronze: { title: "SPONSORS", subtitle: "The elixir of eXabyte 2026",      color: "#cd7f32", shadow: "rgba(205, 127, 50, 0.5)" }
+};
+
+class UnifiedSlider {
     constructor(element) {
-        this.container = element.querySelector('.cards-grid');
+        if (!element) {
+            console.error("UnifiedSlider: Grid element not found!");
+            return;
+        }
+        
+        this.container = element; 
         this.cards = Array.from(element.querySelectorAll('.card'));
-        this.eventTarget = element;
-        this.verticalOffset = 0;
+        
+        if (this.cards.length === 0) {
+            console.warn("UnifiedSlider: No cards found in grid.");
+            return;
+        }
+
+        // Physics variables
         this.currentY = 0;
         this.targetY = 0;
         this.isDragging = false;
         this.startY = 0;
         this.startCurrentY = 0;
-        this.scrollTimeout = null;
-
-        if (element.classList.contains('tier-silver')) {
-            this.activeColor = '#C0C0C0';
-            this.activeShadow = 'rgba(192, 192, 192, 0.5)';
-        } else if (element.classList.contains('tier-bronze')) {
-            this.activeColor = '#cd7f32';
-            this.activeShadow = 'rgba(205, 127, 50, 0.5)';
-        } else {
-            this.activeColor = '#ffea00';
-            this.activeShadow = 'rgba(255, 234, 0, 0.5)';
-        }
-
+        
+        // Dimensions
         const style = window.getComputedStyle(this.container);
         const gap = parseFloat(style.gap) || 0;
-        this.cardHeight = this.cards[0].offsetHeight;
+        this.cardHeight = this.cards[0].offsetHeight || 300; // Fallback size
         this.itemStride = this.cardHeight + gap;
-        this.currentIndex = 0;
+        
+        // Find start indices
+        this.tierIndices = {
+            gold: this.cards.findIndex(c => c.dataset.tier === 'gold'),
+            silver: this.cards.findIndex(c => c.dataset.tier === 'silver'),
+            bronze: this.cards.findIndex(c => c.dataset.tier === 'bronze')
+        };
 
         this.initEvents();
         this.animate();
         this.snapToIndex(0);
-        this.currentY = this.targetY;
     }
 
     initEvents() {
-        this.container.addEventListener('mousedown', e => { e.preventDefault(); this.startDrag(e.clientY); });
+        // Desktop
+        window.addEventListener('mousedown', e => { 
+            // Allow clicking anywhere to drag if interacting with the slider area
+            if(e.target.closest('.slider-viewport') || e.target.closest('.cards-grid')) {
+                this.startDrag(e.clientY); 
+            }
+        });
         window.addEventListener('mousemove', e => this.onDrag(e.clientY));
         window.addEventListener('mouseup', () => this.endDrag());
 
-        this.container.addEventListener('touchstart', e => this.startDrag(e.touches[0].clientY));
+        // Mobile
+        window.addEventListener('touchstart', e => { 
+            if(e.target.closest('.slider-viewport') || e.target.closest('.cards-grid')) {
+                this.startDrag(e.touches[0].clientY); 
+            }
+        });
         window.addEventListener('touchmove', e => this.onDrag(e.touches[0].clientY));
         window.addEventListener('touchend', () => this.endDrag());
 
-        this.eventTarget.addEventListener('wheel', e => this.onWheel(e), { passive: false });
+        // Wheel
+        window.addEventListener('wheel', e => this.onWheel(e), { passive: false });
     }
 
     onWheel(e) {
         e.preventDefault();
-        this.container.style.transition = 'none';
         this.targetY -= e.deltaY * 0.8;
-
-        const screenCenterOffset = (window.innerHeight / 2) - (this.cardHeight / 2) - this.verticalOffset;
-        const maxTarget = screenCenterOffset;
-        const minTarget = screenCenterOffset - ((this.cards.length - 1) * this.itemStride);
-
-        if (this.targetY > maxTarget + 50) this.targetY = maxTarget + 50;
-        if (this.targetY < minTarget - 50) this.targetY = minTarget - 50;
-
+        this.clampTarget();
         clearTimeout(this.scrollTimeout);
-        this.scrollTimeout = setTimeout(() => this.endScroll(), 100);
-    }
-
-    endScroll() {
-        const screenCenterOffset = (window.innerHeight / 2) - (this.cardHeight / 2) - this.verticalOffset;
-        let newIndex = Math.round((screenCenterOffset - this.targetY) / this.itemStride);
-        newIndex = Math.max(0, Math.min(newIndex, this.cards.length - 1));
-        this.snapToIndex(newIndex);
+        this.scrollTimeout = setTimeout(() => this.snapToNearest(), 100);
     }
 
     startDrag(y) {
         this.isDragging = true;
         this.startY = y;
         this.startCurrentY = this.currentY;
-        this.container.style.transition = 'none';
+        this.targetY = this.currentY;
+        this.container.style.cursor = 'grabbing';
     }
 
     onDrag(y) {
         if (!this.isDragging) return;
-        this.targetY = this.startCurrentY + (y - this.startY);
-        this.currentY = this.targetY;
+        const delta = y - this.startY;
+        this.targetY = this.startCurrentY + delta * 1.5; 
     }
 
     endDrag() {
         if (!this.isDragging) return;
         this.isDragging = false;
-        this.endScroll();
+        this.container.style.cursor = 'grab';
+        this.snapToNearest();
+    }
+
+    clampTarget() {
+        const screenCenterOffset = (window.innerHeight / 2) - (this.cardHeight / 2);
+        const maxScroll = screenCenterOffset; 
+        const minScroll = screenCenterOffset - ((this.cards.length - 1) * this.itemStride);
+        
+        if (this.targetY > maxScroll + 50) this.targetY = maxScroll + 50;
+        if (this.targetY < minScroll - 50) this.targetY = minScroll - 50;
+    }
+
+    snapToNearest() {
+        const screenCenterOffset = (window.innerHeight / 2) - (this.cardHeight / 2);
+        let index = Math.round((screenCenterOffset - this.targetY) / this.itemStride);
+        index = Math.max(0, Math.min(index, this.cards.length - 1));
+        this.snapToIndex(index);
     }
 
     snapToIndex(index) {
-        this.currentIndex = index;
-        const screenCenterOffset = (window.innerHeight / 2) - (this.cardHeight / 2) - this.verticalOffset;
+        const screenCenterOffset = (window.innerHeight / 2) - (this.cardHeight / 2);
         this.targetY = screenCenterOffset - (index * this.itemStride);
-
-        const parentSection = this.container.closest('.tier-section');
-        if (!parentSection.classList.contains('active')) return;
-
+        
         const activeCard = this.cards[index];
-        const historyText = document.getElementById('historyText');
-        const historyPanel = document.getElementById('historyPanel');
-        const focusFrame = document.getElementById('focus-frame');
+        if(!activeCard) return;
 
-        if (activeCard && historyText) {
-            const newContent = activeCard.getAttribute('data-history') || "";
+        const tier = activeCard.dataset.tier || 'gold'; // Fallback to gold
+        const config = TIER_CONFIG[tier];
 
-            if (focusFrame) {
-                focusFrame.style.borderColor = this.activeColor;
-                focusFrame.style.boxShadow = `0 0 40px ${this.activeShadow}`;
-            }
-
-            if (historyPanel && window.innerWidth > 900) {
-                historyPanel.style.borderColor = this.activeColor;
-                historyPanel.style.boxShadow = `0 0 15px ${this.activeColor}40`;
-            }
-
-            historyText.style.color = this.activeColor;
-            historyText.style.opacity = '0';
-
-            setTimeout(() => {
-                historyText.innerText = newContent;
-                historyText.style.opacity = '1';
-                historyText.style.textShadow = `0 0 10px ${this.activeColor}80`;
-            }, 150);
+        if (config) {
+            this.updateInterface(tier, config, activeCard);
         }
     }
 
-    updateVisuals() {
-        const focalPoint = (window.innerHeight / 2) - this.verticalOffset;
+    updateInterface(tier, config, activeCard) {
+        const titleEl = document.getElementById('tierTitle');
+        const subEl = document.getElementById('tierSubtitle');
+        const historyText = document.getElementById('historyText');
+        
+        // Update Sidebar Title (Check if changed to avoid flicker)
+        if (titleEl && titleEl.innerText !== config.title) {
+            titleEl.style.opacity = 0;
+            if(subEl) subEl.style.opacity = 0;
+            
+            setTimeout(() => {
+                titleEl.innerText = config.title;
+                if(subEl) subEl.innerText = config.subtitle;
+                
+                titleEl.style.color = config.color;
+                titleEl.style.textShadow = `0 0 20px ${config.shadow}`;
+                
+                titleEl.style.opacity = 1;
+                if(subEl) subEl.style.opacity = 1;
+            }, 200);
+        }
 
-        this.cards.forEach(card => {
-            const rect = card.getBoundingClientRect();
-            const dist = Math.abs(focalPoint - (rect.top + rect.height / 2));
-            const factor = Math.min(dist / (window.innerHeight * 0.6), 1);
-
-            card.style.transform = `scale(${1.0 - factor * 0.25})`;
-            card.style.filter = `blur(${factor * 5}px) brightness(${1 - factor * 0.3})`;
-            card.style.opacity = Math.max(1 - factor * 0.5, 0.2);
-            card.style.zIndex = Math.round(100 - factor * 100);
+        // Update Nav Pills
+        document.querySelectorAll('.nav-item').forEach(item => {
+            const isTarget = item.dataset.targetTier === tier;
+            item.classList.toggle('active', isTarget);
+            
+            if (isTarget) {
+                const pill = document.getElementById('navPill');
+                if(pill) pill.style.borderColor = config.color;
+                
+                item.style.background = config.color;
+                item.style.boxShadow = `0 0 15px ${config.shadow}`;
+                item.style.color = 'black';
+            } else {
+                item.style.background = 'transparent';
+                item.style.boxShadow = 'none';
+                item.style.color = 'rgba(255,255,255,0.5)';
+            }
         });
+
+        // Update History Text
+        if(historyText) {
+            historyText.innerText = activeCard.getAttribute('data-history') || "";
+            historyText.style.color = config.color;
+            historyText.style.textShadow = `0 0 10px ${config.shadow}`;
+        }
+    }
+
+    scrollToTier(tierName) {
+        const index = this.tierIndices[tierName];
+        if (index !== -1 && index !== undefined) {
+            this.snapToIndex(index);
+        }
     }
 
     animate() {
         if (!this.isDragging) {
             this.currentY += (this.targetY - this.currentY) * 0.1;
         }
+
+        // Apply movement
         this.container.style.transform = `translate(-50%, ${this.currentY}px)`;
-        this.updateVisuals();
+        
+        // Visual Scaling Logic
+        const focalPoint = (window.innerHeight / 2);
+        const isDesktop = window.innerWidth > 900;
+
+        this.cards.forEach(card => {
+            const rect = card.getBoundingClientRect();
+            const centerY = rect.top + rect.height / 2;
+            const dist = Math.abs(focalPoint - centerY);
+            
+            let normDist = Math.min(dist / (window.innerHeight * 0.5), 1);
+            
+            // CONFIG: Adjust sizes here
+            let maxScale = isDesktop ? 1.5 : 1.2;
+            let minScale = isDesktop ? 0.6 : 0.2;
+
+            const scaleDropoff = Math.pow(normDist, 2); 
+            let scale = maxScale - (scaleDropoff * (maxScale - minScale));
+            if (scale < minScale) scale = minScale;
+
+            card.style.transform = `scale(${scale})`;
+            card.style.filter = `blur(${normDist * 10}px) brightness(${1 - normDist * 0.5})`;
+            card.style.opacity = Math.max(1 - normDist, 0.3);
+            card.style.zIndex = Math.round(100 - normDist * 100);
+        });
+
         requestAnimationFrame(() => this.animate());
     }
 }
 
-document.querySelectorAll('.tier-section').forEach(section => {
-    const instance = new VerticalSlider(section);
-    const grid = section.querySelector('.cards-grid');
-    if (grid) grid.__sliderInstance = instance;
-});
+// === INITIALIZATION ===
+const gridElement = document.getElementById('mainGrid');
 
-const vertexShader = `
-uniform float size; uniform float scale; uniform float time; varying float vFogDepth;
-float random(vec2 co){ return fract(sin(dot(co, vec2(12.9898, 78.233))) * 43758.5453); }
-float noise(vec2 st) {
-    vec2 i = floor(st); vec2 f = fract(st);
-    float s00 = random(i); float s01 = random(i + vec2(0.0, 1.0));
-    float s10 = random(i + vec2(1.0, 0.0)); float s11 = random(i + vec2(1.0, 1.0));
-    float dx1 = s10 - s00; float dx2 = s11 - s01; float dy1 = s01 - s00; float dy2 = s11 - s10;
-    float a = smoothstep(0.0, 1.0, f.x); float b = smoothstep(0.0, 1.0, f.y);
-    return s00 + a * dx1 + (1.0 - a) * b * dy1 + a * b * dy2;
-}
-void main() {
-    gl_PointSize = size;
-    vec3 temp = position;
-    temp.z = noise(temp.xy + vec2(0.0, time * 0.5)) * 0.3;
-    vec4 mvPosition = modelViewMatrix * vec4(temp, 1.0);
-    gl_PointSize *= (scale / -mvPosition.z);
-    vFogDepth = -mvPosition.z;
-    gl_Position = projectionMatrix * mvPosition;
-}
-`;
+// Only start the slider if the grid exists
+if(gridElement) {
+    const slider = new UnifiedSlider(gridElement);
 
-const fragmentShader = `
-uniform vec3 diffuse; uniform float fogNear; uniform float fogFar; uniform float fogDensity; uniform vec3 fogColor;
-varying float vFogDepth;
-void main() {
-    float d = length(gl_PointCoord - 0.5);
-    if (d > 0.5) discard;
-    gl_FragColor = vec4(mix(diffuse, fogColor, 0.0), 1.4 / vFogDepth);
-}
-`;
-
-const scene = new THREE.Scene();
-scene.fog = new THREE.Fog(0, 5, 10);
-
-const camera = new THREE.PerspectiveCamera(25, window.innerWidth / window.innerHeight, 0.1, 1000);
-const canv = document.getElementById('background');
-const renderer = new THREE.WebGLRenderer({ canvas: canv });
-
-renderer.setPixelRatio(window.devicePixelRatio);
-renderer.setSize(window.innerWidth, window.innerHeight);
-
-window.addEventListener('resize', () => {
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    camera.aspect = window.innerWidth / window.innerHeight;
-    camera.updateProjectionMatrix();
-});
-
-const geometry = new THREE.BufferGeometry();
-const height = 12;
-const width = 5;
-const res = 180;
-const position = new Float32Array(res * res * 3);
-
-for (let i = 0; i < res; i++) {
-    for (let j = 0; j < res; j++) {
-        const x = width * (2 * j / (res - 1) - 1);
-        const y = height * i / (res - 1);
-        const idx = (i * res + j) * 3;
-        position[idx] = x + (i % 2 === 0 ? width / res : 0);
-        position[idx + 1] = y;
-        position[idx + 2] = 0;
+    // Setup Pill Clicks
+    document.querySelectorAll('.nav-item').forEach(item => {
+        item.addEventListener('click', () => {
+            const tier = item.dataset.targetTier;
+            slider.scrollToTier(tier);
+        });
+    });
+    
+    // Auto-zoom for laptop layout
+    function applySmartZoom() {
+        const width = window.outerWidth; 
+        if (width > 1600) {
+            document.body.style.zoom = "125%";
+        } else {
+            document.body.style.zoom = "100%";
+        }
     }
+    applySmartZoom();
+    window.addEventListener('resize', applySmartZoom);
+
+} else {
+    console.error("CRITICAL ERROR: #mainGrid not found in HTML.");
 }
-
-geometry.setAttribute('position', new THREE.BufferAttribute(position, 3));
-
-const material = new THREE.ShaderMaterial(THREE.ShaderLib.points);
-material.uniforms.diffuse.value = new THREE.Color(0xFFDA00);
-material.uniforms.size.value = 20;
-material.uniforms.time = { value: 0 };
-material.defines.USE_SIZEATTENUATION = true;
-material.fog = true;
-material.transparent = true;
-material.fragmentShader = fragmentShader;
-material.vertexShader = vertexShader;
-
-const plane = new THREE.Points(geometry, material);
-scene.add(plane);
-scene.add(new THREE.AmbientLight(0xFFFFFF, 1));
-
-camera.position.z = 0.3;
-camera.position.y = 1;
-camera.rotation.x = Math.PI / 2;
-camera.rotation.z = -Math.PI / 6;
-
-const clock = new THREE.Clock();
-
-function animate() {
-    material.uniforms.time.value += clock.getDelta();
-    renderer.render(scene, camera);
-}
-
-renderer.setAnimationLoop(animate);
