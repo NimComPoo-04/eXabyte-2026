@@ -42,7 +42,7 @@ KEY STRUCTURAL SECTIONS
 - Translated in X direction when switching tiers.
 
 .tier-section
-- One per tier (Gold / Silver / Bronze).
+- One per tier (Gold / / Bronze).
 - Only ONE has `.active` at any time.
 
 .cards-grid
@@ -72,7 +72,7 @@ HTML RULES
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sponsors - Viewfinder Transition</title>
+    <title>Sponsors - baby!</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -103,73 +103,66 @@ HTML RULES
     <div class="sidebar">
         <div class="static-text"></div>
         <div class="sidebar-content" id="sidebarText">
-            <h2 id="tierTitle">GOLD PARTNERS</h2>
-            <span id="tierSubtitle">The Biggest Gs</span>
+            <h2 id="tierTitle">SPONSORS</h2>
+            <span id="tierSubtitle">The exilir of eXabyte-2026</span>
         </div>
+    </div>
+
+    <div class="tier-header">
+         <h2 id="tierTitle">SPONSORS</h2>
+            <span id="tierSubtitle">The exilir of eXabyte-2026</span>
     </div>
 
     <div class="history-panel" id="historyPanel">
         <p class="history-text" id="historyText">
-            Hover or scroll to see sponsor details.
+            sponsors
         </p>
     </div>
 
     <div class="slider-viewport">
-        <div class="slider-track" id="track">
-            
-            <div class="tier-section tier-gold">
-                <div class="cards-grid">
-                    <div class="card" data-history="sponsor 1">
-                        <img src="assets/sponsors/logo2.png" class="sponsor-logo" alt="Gold 1">
-                    </div>
-                    <div class="card" data-history="sponsor 2">
-                        <img src="assets/sponsors/gs.png" class="sponsor-logo" alt="Gold 2">
-                    </div>
-                    <div class="card" data-history="sponsor 3">
-                        <img src="assets/sponsors/starbucks.png" class="sponsor-logo" alt="Gold 3">
-                    </div>
-                </div>
-            </div>
-
-            <div class="tier-section tier-silver">
-                <div class="cards-grid">
-                    <div class="card" data-history="Sponsor 4">
-                        <div class="solid-circle"></div>
-                    </div>
-                    <div class="card" data-history="Sponsor 5">
-                        <div class="solid-circle"></div>
-                    </div>
-                    <div class="card" data-history="Sponsor 6">
-                        <div class="solid-circle"></div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="tier-section tier-bronze">
-                <div class="cards-grid">
-                    <div class="card" data-history="Sponsor 7">
-                        <div class="solid-circle"></div>
-                    </div>
-                    <div class="card" data-history="Sponsor 8">
-                        <div class="solid-circle"></div>
-                    </div>
-                    <div class="card" data-history="Sponsor 9">
-                        <div class="solid-circle"></div>
-                    </div>
-                </div>
-            </div>
-
+    <div class="cards-grid" id="mainGrid">
+        
+        <div class="card" data-tier="gold" data-history="POWERED BY">
+            <img src="logo2.png" class="sponsor-logo" alt="Gold 1">
+        </div>
+        <div class="card" data-tier="gold" data-history="Funding Partner">
+            <img src="gs.png" class="sponsor-logo" alt="Gold 2">
+        </div>
+        <div class="card" data-tier="gold" data-history="Caffeine Partner">
+            <img src="starbucks.png" class="sponsor-logo" alt="Gold 3">
         </div>
 
-        <div class="nav-pill" id="navPill">
-            <div class="nav-item active" data-index="0" data-tier="gold">GOLD</div>
-            <div class="nav-item" data-index="1" data-tier="silver">SILVER</div>
-            <div class="nav-item" data-index="2" data-tier="bronze">BRONZE</div>
+        <div class="card" data-tier="silver" data-history="Sponsor 1">
+            <div class="solid-circle"></div>
         </div>
-    </div>
+        <div class="card" data-tier="silver" data-history="Sponsor 2">
+            <div class="solid-circle"></div>
+        </div>
+        <div class="card" data-tier="silver" data-history="Sponsor 3">
+            <div class="solid-circle"></div>
+        </div>
+
+        <div class="card" data-tier="bronze" data-history="Sponsor 1">
+            <div class="solid-circle"></div>
+        </div>
+        <div class="card" data-tier="bronze" data-history="Sponsor 2">
+            <div class="solid-circle"></div>
+        </div>
+        <div class="card" data-tier="bronze" data-history="Sponsor 3">
+            <div class="solid-circle"></div>
+        </div>
 
     </div>
 
+    <div class="nav-pill" id="navPill">
+        <div class="nav-item active" data-target-tier="gold">GOLD</div>
+        <div class="nav-item" data-target-tier="silver">SILVER</div>
+        <div class="nav-item" data-target-tier="bronze">BRONZE</div>
+    </div>
+</div>
+
+    </div>
+    <script src="3d-sea.js" type="module"></script>
     <script type="module" src="static/sponsors.js"></script>
     <script src="static/components/navbar.js"></script>
 </body>
