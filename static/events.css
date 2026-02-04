@@ -228,14 +228,19 @@ body.menu-open .container {
   transition: filter 220ms ease;
 }
 
+/*
 @media (min-width: 1024px) {
+*/
   .menu-panel,
   .mobile-menu-panel {
     transform: scale(0.88);
     opacity: 0;
   }
+  /*
 }
+*/
 
+/*
 @media (max-width: 1023px) {
   .menu-panel,
   .mobile-menu-panel {
@@ -290,6 +295,7 @@ body.menu-open .container {
     height: 28px !important;
   }
 }
+*/
 
 @keyframes border-spin {
   from { transform: rotate(0deg); }
