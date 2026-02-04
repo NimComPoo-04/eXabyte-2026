@@ -71,9 +71,10 @@ body {
 }
 
 .team-division {
-    min-height: 75vh;
+    /* min-height: 65vh; */
     margin-bottom: 5rem;
     padding: 1.5rem;
+    padding-bottom: 3.5rem;
     border-radius: 1rem;
     backdrop-filter: blur(10px);
     /* 
@@ -85,11 +86,26 @@ body {
     overflow-y: scroll; */
 }
 
+.glass-card {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid white;
+    border-radius: 20px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 1px 2px 30px 10px rgba(255, 255, 255, 0.3);
+
+    /* TODO: adding this here to fix weird card look */
+        background: rgba(255, 255, 255, 0.1);
+        border: none;
+        box-shadow: none;
+}
+
 .division-title {
     font-size: clamp(1.4rem, 4vw, 2.5rem);
     font-weight: 600;
     color: var(--gold);
     margin-bottom: 3rem;
+    margin-top: 0.9rem;
     border-left: 0.25rem solid var(--gold);
     padding-left: 1rem;
     /* position: sticky;
@@ -103,8 +119,9 @@ body {
     display: flex;
     gap: 4rem;
     flex-wrap: wrap;
-    justify-content: flex-start;
+    justify-content: center; /*flex-start;*/
 }
+
 
 .people-card {
     position: relative;
@@ -167,6 +184,7 @@ body {
     opacity: 0;
     backdrop-filter: blur(4px);
     transition: opacity 0.3s ease;
+    border-radius: 20px;
 }
 
 .people-card:hover .card-overlay {
@@ -192,6 +210,16 @@ body {
 }
 
 @media (max-width: 480px) {
+    .team-division{
+        width: 80%;
+        margin: auto;
+        margin-bottom: 5rem;
+    }
+    .glass-card{
+        background: rgba(255, 255, 255, 0.1);
+        border: none;
+        box-shadow: none;
+    }
     .abt-hero {
         height: 60vh;
         width: fit-content;
@@ -209,15 +237,18 @@ body {
         position: relative;
         letter-spacing: 1.5px;
     }
-    .about-wrapper{
+
+    .about-wrapper {
         width: 100%;
     }
+
     .people-card {
-        width: 70%;
-        height: 22rem;
+        width: 90%;
+        height: 24rem;
         margin: auto;
     }
-    .division-title{
+
+    .division-title {
         font-size: clamp(1.5rem, 7vw, 3rem);
     }
 }
