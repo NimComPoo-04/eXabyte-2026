@@ -93,6 +93,11 @@ body {
     position: relative;
     overflow: hidden;
     box-shadow: 1px 2px 30px 10px rgba(255, 255, 255, 0.3);
+
+    /* TODO: adding this here to fix weird card look */
+        background: rgba(255, 255, 255, 0.1);
+        border: none;
+        box-shadow: none;
 }
 
 .division-title {
@@ -114,7 +119,7 @@ body {
     display: flex;
     gap: 4rem;
     flex-wrap: wrap;
-    justify-content: flex-start;
+    justify-content: center; /*flex-start;*/
 }
 
 
@@ -179,6 +184,7 @@ body {
     opacity: 0;
     backdrop-filter: blur(4px);
     transition: opacity 0.3s ease;
+    border-radius: 20px;
 }
 
 .people-card:hover .card-overlay {

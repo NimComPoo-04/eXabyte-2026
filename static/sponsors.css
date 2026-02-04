@@ -602,7 +602,7 @@ body {
 
 #tierTitle {
     font-family: 'Orbitron', sans-serif;
-    font-size: 4rem; 
+    font-size: 3rem; 
     font-weight: 700;
     margin: 0;
     line-height: 1;
@@ -675,7 +675,7 @@ body {
     }
 
     #tierTitle {
-        font-size: 1.8rem !important; 
+        font-size: 2rem !important; 
         text-shadow: 0 0 10px currentColor !important; 
         color: goldenrod;
         /* Color is handled by JS, but you can force goldenrod here if JS fails */
