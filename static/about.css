@@ -85,7 +85,7 @@ body {
 }
 
 .about-wrapper {
-    width: 70%;
+    width: 80%;
     min-height: 100vh;
     position: sticky;
     top: 0rem;
@@ -95,7 +95,7 @@ body {
 
 .team-division {
     /* min-height: 65vh; */
-    margin-bottom: 5rem;
+    margin-bottom: 2.5rem;
     padding: 1.5rem;
     padding-bottom: 3.5rem;
     border-radius: 1rem;
@@ -137,7 +137,7 @@ body {
 
 .people-row {
     width: 100%;
-    max-width: 60rem;
+    /*max-width: 60rem;*/
     margin: auto;
     display: flex;
     gap: 4rem;
@@ -148,9 +148,10 @@ body {
 
 .people-card {
     position: relative;
-    width: 100%;
-    max-width: 17rem;
-    height: 25rem;
+    /*width: 100%;*/
+    /*max-width: 17rem;*/
+    width: 20rem;
+    aspect-ratio: calc(4/5);
     background-color: var(--card-bg);
     border-radius: 1rem;
     overflow: hidden;
@@ -251,7 +252,7 @@ body {
     .about-main-title {
         font-size: 15vw;
         margin-bottom: 1rem;
-        width: 100%;
+        /* width: 100%;*/
         text-align: center;
     }
 
