@@ -190,11 +190,15 @@ document.addEventListener('DOMContentLoaded', () => {
             modalLink.href = data.link;
 
             modal.classList.add('active');
+            // FIXME: WHAT THE ACTUAL SHYTE STAIN
+            document.querySelector('.cs-navbar').style.display = 'none';
         });
     });
 
     const closeModal = () => {
         modal.classList.remove('active');
+        // FIXME: WHAT THE ACTUAL SHYTE STAIN 2
+        document.querySelector('.cs-navbar').style.display = 'block';
     };
 
     closeBtn.addEventListener('click', closeModal);
