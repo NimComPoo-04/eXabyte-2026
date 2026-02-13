@@ -126,10 +126,9 @@
   <link href="static/components/navbar.css" rel="stylesheet"/>
  </head>
  <body>
-  <iframe 
+<iframe 
     id="tutorial-frame" 
-    src="tutorial.html" 
-    style="
+    src="tutorial.html"  style="
         position: fixed; 
         top: 0; 
         left: 0; 
@@ -137,9 +136,9 @@
         height: 100vh; 
         border: none; 
         z-index: 5000; 
-        background: rgba(0,0,0,0.5); /* Semi-transparent dimming */
-        backdrop-filter: blur(10px); /* <--- ADD THIS FOR BLUR */
-        -webkit-backdrop-filter: blur(10px); /* Safari support */    
+        background: rgba(0,0,0,0.5); 
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);    
     "
 ></iframe>
   <canvas id="xcryptus">
