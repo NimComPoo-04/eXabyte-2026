@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+
+  <!-- Responsive viewport for print/desktop layout -->
+  <meta name="viewport" content="width=900, initial-scale=1">
+
+  <title>Individual Ticket</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+
+  <!-- Main ticket styles -->
+  <link rel="stylesheet" href="ticketstyle.css" />
+</head>
+
+<body>
+
+  <!-- Page Wrapper -->
+  <div class="page-wrapper">
+
+    <!-- Informational message (not printed) -->
+    <div class="view-message">
+      (The Following Message Will Not Appear When You Print)<br><br>
+      Best Viewed In Desktop Mode.<br>
+      Turn off Dark Mode And High Contrast Mode Before Printing And/Or Downloading.<br>
+      Print In Landscape.<br><br>
+      Carry Either A Soft Or Hard Copy Of This Ticket To eXabyte'26.<br>
+      One Ticket Allows Only One Person to Enter Only One Event.<br>
+      For Entering Other Events Please Register For Them Separately And You Will Get A Unique Ticket For Every Event You Register For<br><br>
+      See You At eXabyte'26!<br>
+    </div>
+
+
+    <!-- TICKET CONTAINER -->
+    <div class="ticket-container">
+      <div class="ticket pamphlet">
+
+        <!-- ================= LEFT PANEL ================= -->
+        <div class="ticket-left">
+
+          <div class="ticket-left-content">
+
+            <!-- Event Date -->
+            <span class="event-date" id="eventDate">
+              <span id="eventDay">DD</span> March 2026
+            </span>
+
+            <!-- Event Logo -->
+            <div class="event-logo">
+              <img src="logo.png" alt="Event Logo" />
+            </div>
+
+            <!-- Event Description -->
+            <p class="event-description" id="eventDescription">
+              exploring a realm of innovation through iteration
+            </p>
+
+          </div>
+
+          <!-- Event Name / Footer -->
+          <div class="ticket-left-footer" id="eventName">
+            EVENT NAME HERE
+          </div>
+
+        </div> <!-- end ticket-left -->
+
+
+        <!-- ================= RIGHT PANEL ================= -->
+        <div class="ticket-right">
+
+          <!-- Attendee Info -->
+          <div class="attendee-info">
+
+            <!-- Name -->
+            <div class="info-item">
+              <span class="label">Name:</span>
+              <span class="value" id="attendeeName1">Lorem ipsum dolor sit amet consectetur adipiscing elit</span>
+            </div>
+
+            <!-- Phone Number -->
+            <div class="info-item">
+              <span class="label">Phone No:</span>
+              <span class="value" id="phoneNumber1">NNNNN NNNNN</span>
+            </div>
+
+            <!-- QR Code -->
+            <div class="qr-placeholder">
+              <img id="qrCode1" alt="QR Code" />
+            </div>
+
+          </div> <!-- end attendee-info -->
+
+
+          <!-- Ticket IDs -->
+          <div class="ticket-ids">
+
+            <!-- Participant ID -->
+            <div class="individual-id-vertical">
+              Participant ID:&nbsp;<span id="indiId1">XXXXX-XXXXX</span>
+            </div>
+
+          </div> <!-- end ticket-ids -->
+
+        </div> <!-- end ticket-right -->
+
+      </div> <!-- end ticket pamphlet -->
+    </div> <!-- end ticket-container -->
+
+  </div> <!-- end page-wrapper -->
+
+
+  <!-- JS Script -->
+  <script src="ticketscript.js"></script>
+
+</body>
+
+</html>

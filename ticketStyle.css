@@ -1,0 +1,333 @@
+/* ================= COLOR PALETTE ================= */
+:root {
+  --a1: #C39A22;  
+  --a2: #FFD700;  
+  --a3: #FDDC5C;  
+
+  --b1: #FFFFFF; 
+  --b2: #FFFFF0;  
+  --b3: #F5F5DC;  
+
+  --c1: #000000;  
+  --c2: #160D08;  
+  --c3: #27292B;  
+}
+
+
+/* ================= GLOBAL STYLES ================= */
+* {
+  box-sizing: border-box;
+  font-family: "Space Grotesk", sans-serif;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--b1);
+}
+
+/* Landscape print */
+@page {
+  size: landscape;
+  margin: 10mm;
+}
+
+
+/* ================= PRINT SETTINGS ================= */
+@media print {
+  body {
+    background: #fff !important;
+    -webkit-print-color-adjust: exact !important;
+    color-adjust: exact !important;
+  }
+
+  .ticket.pamphlet,
+  .ticket-left,
+  .ticket-right,
+  .ticket-right-team,
+  .individual-id-vertical,
+  .team-id-vertical,
+  img {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  .ticket.pamphlet {
+    box-shadow: none !important;
+    border: 1px solid black;
+  }
+
+  .ticket-left,
+  .ticket-right,
+  .ticket-right-team {
+    background-color: inherit !important;
+  }
+
+  .ticket-container {
+    width: 900px !important;
+    height: 500px !important;
+    background-color: transparent !important;
+    page-break-before: auto;
+    page-break-after: always;
+    page-break-inside: avoid;
+    margin-bottom: 0;
+  }
+
+  .ticket-container:last-child {
+    page-break-after: auto;
+  }
+
+  .view-message {
+    display: none !important;
+  }
+}
+
+
+/* ================= PAGE WRAPPER ================= */
+.page-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  min-height: 100vh;
+  padding-top: 20px;
+}
+
+
+/* ================= INFORMATION MESSAGE ================= */
+.view-message {
+  font-size: 14px;
+  color: #333;
+  text-align: center;
+  margin-bottom: 64px;
+}
+
+
+/* ================= TICKET CONTAINER ================= */
+.ticket-container {
+  width: 100%;
+  max-width: 900px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 32px; /* gap between tickets */
+}
+
+.ticket-container:last-child {
+  margin-bottom: 0;
+}
+
+
+/* ================= TICKET CARD ================= */
+.ticket.pamphlet {
+  width: 100%;
+  max-width: 900px;
+  aspect-ratio: 900 / 500;
+  height: 500px;
+  display: flex;
+  position: relative;
+  background: var(--c2);
+  border-radius: 24px;
+  box-shadow: 0 40px 80px rgba(0,0,0,0.2),
+              inset 0 0 20px rgba(255,255,255,0.05);
+  overflow: hidden;
+}
+
+
+/* ================= LEFT PANEL ================= */
+.ticket-left {
+  flex: 3;
+  padding: 32px;
+  background: var(--c1);
+  border-radius: 20px;
+  text-align: center;
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+
+  display: flex;
+  flex-direction: column;
+}
+
+.ticket-left-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.ticket-left-footer {
+  margin-top: 16px;
+  padding-top: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.85);
+  border-top: 1px solid rgba(255,255,255,0.15);
+}
+
+/* Event logo and text */
+.event-logo img {
+  max-width: 80%;
+  height: auto;
+  margin-bottom: 16px;
+}
+
+.event-date {
+  font-size: clamp(10px, 1.2vw, 14px);
+  color: var(--b1);
+  font-weight: 500;
+  margin-bottom: 12px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.event-description {
+  font-size: clamp(12px, 1.5vw, 16px);
+  line-height: 1.5;
+  color: var(--b1);
+  max-width: 90%;
+}
+
+
+/* ================= RIGHT PANEL - INDIVIDUAL ================= */
+.ticket-right {
+  flex: 1.2;
+  background: var(--c3);
+  display: flex;
+  flex-direction: column;
+  padding: 32px 16px 16px 16px;
+  padding-right: 56px;
+  border-left: 1px dashed rgba(255, 255, 255, 0.15);
+  border-radius: 0 20px 20px 0;
+  position: relative;
+}
+
+
+/* ================= RIGHT PANEL - TEAM ================= */
+.ticket-right-team {
+  flex: 1.8;
+  display: flex;
+  background: var(--c3);
+  border-left: 1px dashed rgba(255,255,255,0.15);
+  border-radius: 0 20px 20px 0;
+  padding: 16px 56px 16px 16px;
+}
+
+.ticket-right-team .attendee-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+
+/* ================= ATTENDEE INFO ================= */
+.attendee-info {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  flex-grow: 1;
+}
+
+.info-item .label {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.6);
+  text-transform: uppercase;
+  letter-spacing: 1.8px;
+}
+
+.info-item .value {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--b1);
+  white-space: normal;
+  word-break: break-word;
+}
+
+#phoneNumber {
+  letter-spacing: 0.10em;
+}
+
+
+/* ================= QR CODE PLACEHOLDERS ================= */
+.qr-placeholder,
+.qr-placeholder-team {
+  height: 200px;
+  border: 1px dashed rgba(255, 255, 255, 0.25);
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.04);
+  margin-top: auto;
+}
+
+.qr-placeholder {
+  width: 100%;
+}
+
+.qr-placeholder-team {
+  width: 85%;
+}
+
+.qr-placeholder img,
+.qr-placeholder-team img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border: 2px dashed rgba(255,215,0,0.4);
+  border-radius: 16px;
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.4);
+}
+
+
+/* ================= VERTICAL ID STRIPS ================= */
+.ticket-ids {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  display: flex;
+  gap: 4px;
+  z-index: 2;
+}
+
+.individual-id-vertical {
+  position: relative;
+  width: 40px;
+  height: 100%;
+  background: var(--a2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  font-weight: 700;
+  color: var(--c2);
+  letter-spacing: 1.2px;
+  font-size: 14px;
+  border-top-right-radius: 24px;
+  border-bottom-right-radius: 24px;
+}
+
+.team-id-vertical {
+  position: relative;
+  width: 40px;
+  height: 100%;
+  background: var(--b3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  font-weight: 700;
+  color: var(--c1);
+  letter-spacing: 1.2px;
+  font-size: 14px;
+  border-radius: 0;
+}
