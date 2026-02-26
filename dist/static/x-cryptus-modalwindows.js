@@ -1,43 +1,6 @@
 // Modal Functionality
 // --- PREVIEW MODAL LOGIC --- //
 
-// 1. Data Configuration (Edit this to change content)
-const projectDetails = [
-    {
-        title: "Quantum Enigma",
-        desc: "An in-depth look at how quantum states are revolutionizing cryptography. We explore the latest breakthroughs in qubit stability and error correction.",
-        link: "assets/x-cryptus/vol1.jpg"
-    },
-    {
-        title: "Neuro Link",
-        desc: "Bridging the gap between biological neurons and silicon chips. This edition covers the ethics and engineering of brain-computer interfaces.",
-        link: "assets/x-cryptus/vol2.jpg"
-    },
-    {
-        title: "Chit Chat",
-        desc: "The rise of LLMs and what it means for human communication. Is the Turing test still relevant in 2026? Find out in our exclusive report.",
-        link: "assets/x-cryptus/vol3.jpg"
-    },
-    {
-        title: "Backend Architecture",
-        desc: "Scalability isn't just a buzzword. We dive deep into microservices, serverless computing, and database sharding for the modern web.",
-        link: "assets/x-cryptus/vol4.jpg"
-    },
-    {
-        title: "Game of Life",
-        desc: "Simulating cellular automata to understand complex biological systems. A tribute to John Conway and the rules that govern chaos.",
-        link: "assets/x-cryptus/vol4.jpg"
-    }
-];
-
-const projectCards = [
-    ['assets/x-cryptus/vol1.jpg', 0],
-    ['assets/x-cryptus/vol2.jpg', 1],
-    ['assets/x-cryptus/vol3.jpg', 2],
-    ['assets/x-cryptus/vol4.jpg', 3],
-    ['assets/x-cryptus/vol4.jpg', 4]
-];
-
 const modal = document.getElementById('preview-modal');
 const closeBtn = document.getElementById('close-modal');
 

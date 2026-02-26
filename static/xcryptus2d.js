@@ -141,34 +141,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // --- PREVIEW MODAL LOGIC --- //
 
-const projectDetails = [
-    {
-        title: "Quantum Enigma",
-        desc: "An in-depth look at how quantum states are revolutionizing cryptography. We explore the latest breakthroughs in qubit stability and error correction.",
-        link: "https://drive.google.com/your-file-link-1"
-    },
-    {
-        title: "Neuro Link",
-        desc: "Bridging the gap between biological neurons and silicon chips. This edition covers the ethics and engineering of brain-computer interfaces.",
-        link: "https://drive.google.com/your-file-link-2"
-    },
-    {
-        title: "Chit Chat",
-        desc: "The rise of LLMs and what it means for human communication. Is the Turing test still relevant in 2026? Find out in our exclusive report.",
-        link: "https://drive.google.com/your-file-link-3"
-    },
-    {
-        title: "Backend Architecture",
-        desc: "Scalability isn't just a buzzword. We dive deep into microservices, serverless computing, and database sharding for the modern web.",
-        link: "https://drive.google.com/your-file-link-4"
-    },
-    {
-        title: "Game of Life",
-        desc: "Simulating cellular automata to understand complex biological systems. A tribute to John Conway and the rules that govern chaos.",
-        link: "https://drive.google.com/your-file-link-5"
-    }
-];
-
 document.addEventListener('DOMContentLoaded', () => {
     const modal = document.getElementById('preview-modal');
     const closeBtn = document.getElementById('close-modal');
