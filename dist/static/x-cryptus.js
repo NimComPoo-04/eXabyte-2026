@@ -6,17 +6,16 @@ const data = {
     voxelSize: 16,
     voxelHeight: 24,
     corridorLength: 8,
-    corridorCount: 5,
+    corridorCount: 4,
     startPosition: {
         x: 0,
         z: 0
     },
     volumes: [
-        "assets/x-cryptus/vol1.jpg",
-        "assets/x-cryptus/vol2.jpg",
-        "assets/x-cryptus/vol3.jpg",
         "assets/x-cryptus/vol4.jpg",
-        "assets/x-cryptus/vol4.jpg"
+        "assets/x-cryptus/vol3.jpg",
+        "assets/x-cryptus/vol2.jpg",
+        "assets/x-cryptus/vol1.jpg"
     ]
 }
 
