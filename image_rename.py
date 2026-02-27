@@ -2,7 +2,10 @@ import os
 from PIL import Image
 
 output_dir = os.path.join(os.getcwd(), "assets", "about_us")
-input_dir = os.path.join(os.path.expanduser("~"), "Downloads", "ABOUT_US_PICS")
+
+input_dir = input('Enter input directory: ')
+if input_dir == '':
+    input_dir = os.path.join(os.path.expanduser("~"), "Downloads", "ABOUT_US_PICS")
 
 os.makedirs(output_dir, exist_ok=True)
 
