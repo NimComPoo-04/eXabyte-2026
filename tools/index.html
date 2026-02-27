@@ -1,0 +1,20 @@
+<!doctype html>
+<html>
+    <head>
+        <title>ScanQR</title>
+    </head>
+    <body>
+        <script>
+
+            if(!("BarcodeDetector" in globalThis)) {
+                document.write('<h1>Barcode Detector is not there</h1>');
+            }
+            else {
+                const barcode = new BarcodeDetector({
+                    formats: ["code_39", "codebar", "ean_13"]
+                });
+            }
+
+        </script>
+    </body>
+</html>
