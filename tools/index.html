@@ -2,19 +2,41 @@
 <html>
     <head>
         <title>ScanQR</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <style>
+body {
+    margin: 0px;
+    display: flex;
+    flex-direction: column;
+}
+
+canvas {
+    width: 100%;
+    aspect-ratio: 1;
+    display: block;
+}
+
+button {
+    width: 100%;
+    font-size: 2em;
+}
+
+section {
+    margin-top: 20px;
+    margin-inline: 30px;
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: column-reverse;
+}
+        </style>
     </head>
     <body>
-        <script>
+        <video autoplay playsinline style="display: none;"></video>
+        <canvas width=480 height=640></canvas>
+        <button>Read QR</button>
 
-            if(!("BarcodeDetector" in globalThis)) {
-                document.write('<h1>Barcode Detector is not there</h1>');
-            }
-            else {
-                const barcode = new BarcodeDetector({
-                    formats: ["code_39", "codebar", "ean_13"]
-                });
-            }
+        <section></section>
 
-        </script>
+        <script src="barcode.js"></script>
     </body>
 </html>
