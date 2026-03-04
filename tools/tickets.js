@@ -59,9 +59,19 @@ See You At eXabyte'26!`,
 
 function main(e) {
   try {
+    
     const event_name = e.range.getSheet().getName().toLowerCase();
     const eve = EVENTS[event_name];
 
+    // Quickly send a backup
+    try {
+      const backup_sheet = SpreadsheetApp.openById(SHEET);
+      const where_to_write = backup_sheet.getSheetByName(event_name);
+      where_to_write.appendRow(e.values);
+    } catch (oerr) {
+      // DoneDodie.
+    }
+    
     // Get the Participant Names
     let participant_names = [];
     for(let i = 0; i < eve.names.length; i++)
