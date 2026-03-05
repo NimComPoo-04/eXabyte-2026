@@ -338,6 +338,7 @@ function animate(now) {
 
 loadingManager.onLoad = () => {
     animate(performance.now());
+    setTimeout(() => logoExiting = true, 7000);
 };
 
 window.addEventListener('resize', () => {
