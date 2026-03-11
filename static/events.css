@@ -546,10 +546,6 @@ body.menu-open .container {
 }
 
 #online-events-grid .cards-grid .card:nth-child(10) {
-  --card-bg: url("../assets/excelerate.jpeg");
-}
-
-#online-events-grid .cards-grid .card:nth-child(11) {
   --card-bg: url("../assets/sudox.jpeg");
 }
 
@@ -564,6 +560,10 @@ body.menu-open .container {
 
 #offline-events-grid .cards-grid .card:nth-child(3) {
   --card-bg: url("../assets/snappit.jpg");
+}
+
+#offline-events-grid .cards-grid .card:nth-child(4) {
+  --card-bg: url("../assets/excelerate.jpeg");
 }
 
 .cards-grid .card::before {
