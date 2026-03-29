@@ -2,26 +2,24 @@
 
 eXabyte-2026 Website Development
 
+## This repository is archived since the event was successfully completed on 24th March 2026
 
-## Building html files (subject to change)
+Thanks to everyone who Contributed in the development of this project:
+- @TheSam13 for the Amazing Sponsors page and X-cryptus 2D page, that is probably why anyone on the phone will actually be able to look at the magazines.
+- @this-is-priyanshu for the extremely important Events Page and for being an angle and chaning the descriptions of events several times. 
+- @idkbroshutup0840 for the amazing tickets and the insane ammount of patient with me during the depolyment of said tickets
+- @GeneralFloofypaws for acctually building the most sophesticated loading screen out of all the exabyte events
+- @Shuvadip-Ghosh for clicking and changing the about-us pictures even before that thought crossed my mind, peak efficiency.
 
-**Problem:** HTML is not good for modular development, so either we delegate a large portion
-of the job to client side, which is not good for performance and results in a lot of JS being
-transmitted over the wire.
+I think I covered everyone, if I missed anyone my apologies.
 
-**Solution:** We prerender the HTML that can be pre-rendered, and to achieve this we use a templating
-engine. We are testing out jinja seems to a solid templating engine. For the content portion
-we are using HJSON. And at the end we are prettyfing the output using BeautifulSoup.
+The code is mostly self explnatory, but it has becomes a mess over time, apologies for anyone having to look at it
+in advance.
 
-**Building Workflow:**
-- All the html files are kept in the 'templates' directory
-- Any component of the html that can be reused is kept in the 'templates/components' directory
-- All CSS and JS is stored in the static directory and the linking happens are normal html
-- The content of the site is kept in the 'content' directory.
-- After building out the html files, we have to run build.py which will compile all the changes and put them in the 'dist' directory.
+The other part is there is a ticking system which is managed using google appscript, the majority of that code is present in
+tools, if next year this ticking system is kept alive then consider using it. or just go with a custom serverless approach.
 
-We will ensure that at all times the dist directory is in a position that it can shipped.
+In the end best of luck to anyone who reads this, I am sure you will need it.
 
-**Development Workflow:**
-During development, developer can use the 'python run.py' command. which will launch a hot-reloading server. Chaning any of the
-relevant files will instantly update the browser. Simplifying development effort by a significant ammount.
+Good Exabyte to you ✊
+~Aanjishnu
