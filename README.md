@@ -8,7 +8,7 @@ Thanks to everyone who Contributed in the development of this project:
 - @TheSam13 for the Amazing Sponsors page and X-cryptus 2D page, that is probably why anyone on the phone will actually be able to look at the magazines.
 - @this-is-priyanshu for the extremely important Events Page and for being an angle and chaning the descriptions of events several times. 
 - @idkbroshutup0840 for the amazing tickets and the insane ammount of patient with me during the depolyment of said tickets
-- @GeneralFloofypaws for acctually building the most sophesticated loading screen out of all the exabyte events
+- @GeneralFloofypaws for actually building the most sophesticated loading screen out of all the exabyte events
 - @Shuvadip-Ghosh for clicking and changing the about-us pictures even before that thought crossed my mind, peak efficiency.
 
 I think I covered everyone, if I missed anyone my apologies.
