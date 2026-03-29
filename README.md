@@ -13,11 +13,14 @@ Thanks to everyone who Contributed in the development of this project:
 
 I think I covered everyone, if I missed anyone my apologies.
 
-The code is mostly self explnatory, but it has becomes a mess over time, apologies for anyone having to look at it
+The code is mostly self explanatory, but it has becomes a mess over time, apologies to anyone having to look at it
 in advance.
 
 The other part is there is a ticking system which is managed using google appscript, the majority of that code is present in
 tools, if next year this ticking system is kept alive then consider using it. or just go with a custom serverless approach.
+
+There is also a sister repo to this, that is for the QR Scanner which scans the tickets [https://github.com/NimComPoo-04/redirection-mechanism](https://github.com/NimComPoo-04/redirection-mechanism)
+Mentioning it here just for the sake of completeness.
 
 In the end best of luck to anyone who reads this, I am sure you will need it.
 
